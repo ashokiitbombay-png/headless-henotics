@@ -1,7 +1,7 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
 import { companyDetails, citySlugs } from "@/lib/constants";
-import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, ShieldCheck, Microscope, Activity, HeartPulse, Baby } from "lucide-react";
+import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, ShieldCheck, Microscope, Activity, HeartPulse, Baby, FileText } from "lucide-react";
 
 export default function PremiumFooter() {
   return (
@@ -25,7 +25,6 @@ export default function PremiumFooter() {
                 {/* 3D LOGO CONTAINER */}
                 <div className="relative w-auto h-20 flex items-center gap-4">
                    <div className="relative w-20 h-20 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md flex items-center justify-center overflow-hidden group-hover:border-blue-500/50 transition-all duration-500">
-                      {/* NEXT.JS OPTIMIZED IMAGE */}
                       <Image 
                         src="/images/henotic-diagnostics-logo.webp" 
                         alt="Henotic Diagnostics Logo" 
@@ -192,7 +191,10 @@ export default function PremiumFooter() {
               ))}
            </div>
            
-           <div className="flex gap-6 text-[10px] font-bold text-slate-600 tracking-widest uppercase">
+           <div className="flex gap-6 text-[10px] font-bold text-slate-600 tracking-widest uppercase items-center">
+              <Link href="/sitemap.xml" className="hover:text-white transition-colors flex items-center gap-1">
+                <FileText size={12} /> Sitemap
+              </Link>
               <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
               <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
            </div>
