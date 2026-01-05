@@ -1,0 +1,58 @@
+﻿@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* 1. Define Premium Medical Colors */
+  --color-medical-50: #f0f9ff;
+  --color-medical-100: #e0f2fe;
+  --color-medical-500: #0ea5e9;
+  --color-medical-600: #0284c7;
+  --color-medical-900: #0c4a6e;
+
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-900: #134e4a;
+
+  /* 2. Restore 'Slate' (Map it to Gray for v4 compatibility) */
+  --color-slate-50: var(--color-gray-50);
+  --color-slate-100: var(--color-gray-100);
+  --color-slate-200: var(--color-gray-200);
+  --color-slate-300: var(--color-gray-300);
+  --color-slate-400: var(--color-gray-400);
+  --color-slate-500: var(--color-gray-500);
+  --color-slate-600: var(--color-gray-600);
+  --color-slate-700: var(--color-gray-700);
+  --color-slate-800: var(--color-gray-800);
+  --color-slate-900: var(--color-gray-900);
+  --color-slate-950: var(--color-gray-950);
+
+  /* 3. Premium Shadows */
+  --shadow-premium: 0 10px 40px -10px rgba(0,0,0,0.1);
+  --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.3);
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-lg border border-white/20 shadow-xl;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-medical-900 to-medical-600;
+  }
+  .container-premium {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-slate-900;
+  }
+}
