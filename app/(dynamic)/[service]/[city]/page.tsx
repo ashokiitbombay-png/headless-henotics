@@ -3,6 +3,7 @@ import { serviceSlugs, citySlugs, companyDetails } from "@/lib/constants";
 import { getServiceContent } from "@/lib/content-engine";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PricingCard, ProcedureTimeline, ReviewCard } from "@/components/ui/ServiceComponents";
+import PremiumBookingForm from "@/components/ui/PremiumBookingForm"; // <-- IMPORT ADDED
 import { 
   Phone, Clock, CheckCircle, FileText, Zap, 
   MapPin, Star, User, Activity, Microscope, ArrowRight, Info
@@ -50,8 +51,8 @@ export default async function ProgrammaticPage({ params }: { params: Promise<{ s
               {content.scientificDesc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href={`tel:${companyDetails.phone[0]}`} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-900/40 transition flex items-center justify-center gap-3">
-                Book in {cityName} <Zap size={20} />
+              <a href="#booking" className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-blue-900/40 transition flex items-center justify-center gap-3">
+                Book Now <Zap size={20} />
               </a>
             </div>
           </div>
@@ -69,7 +70,7 @@ export default async function ProgrammaticPage({ params }: { params: Promise<{ s
               <ul className="text-sm text-slate-600 space-y-2 mb-6 border-t border-slate-100 pt-4 h-24 overflow-hidden">
                  {item.features.map((f, k) => <li key={k} className="flex gap-2"><CheckCircle size={14} className="text-green-500 shrink-0"/> {f}</li>)}
               </ul>
-              <a href={`tel:${companyDetails.phone[0]}`} className="block w-full py-3 rounded-lg bg-slate-900 text-white text-center font-bold text-sm hover:bg-blue-600 transition">Book Now</a>
+              <a href="#booking" className="block w-full py-3 rounded-lg bg-slate-900 text-white text-center font-bold text-sm hover:bg-blue-600 transition">Book Now</a>
             </div>
           ))}
         </div>
@@ -105,6 +106,13 @@ export default async function ProgrammaticPage({ params }: { params: Promise<{ s
                    ))}
                 </div>
             </div>
+         </div>
+      </section>
+
+      {/* 4. PREMIUM BOOKING FORM (INJECTED HERE) */}
+      <section id="booking" className="py-12 bg-slate-100/50">
+         <div className="container mx-auto px-6">
+            <PremiumBookingForm />
          </div>
       </section>
 
