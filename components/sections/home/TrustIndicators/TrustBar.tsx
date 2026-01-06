@@ -1,4 +1,4 @@
-﻿import { trustMetrics, accreditations } from "../trustIndicators.config";
+﻿import { trustMetrics, accreditations } from "./trustIndicators.config";
 import { ShieldCheck } from "lucide-react";
 
 export default function TrustBar() {
