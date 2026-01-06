@@ -3,11 +3,13 @@ import TrustBar from "@/components/sections/home/TrustIndicators/TrustBar";
 import Accreditations from "@/components/sections/home/TrustIndicators/blocks/Accreditations";
 import ServiceLines from "@/components/sections/home/ServiceLines/ServiceLines";
 import MedicalTechnology from "@/components/sections/home/MedicalTechnology/MedicalTechnology";
+import CorporateVideo from "@/components/sections/home/CorporateVideo";
+import FacilityShowcase from "@/components/sections/home/FacilityShowcase";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Henotic Diagnostics | Premium Medical Imaging & Pathology",
-  description: "NABL Accredited Diagnostic Center in Navi Mumbai. 3T MRI, PET-CT, Ultrasound, and Pathology services with 99.7% accuracy.",
+  description: "NABL Accredited Diagnostic Center in Navi Mumbai. 3T MRI, PET-CT, Ultrasound, and Pathology services.",
 };
 
 export default function Home() {
@@ -15,11 +17,21 @@ export default function Home() {
     <main className="bg-white">
       <HeroMedical />
       <TrustBar />
-      <Accreditations />
-      <ServiceLines />
-      <MedicalTechnology />
       
-      {/* Clinical Quality Assurance Banner */}
+      {/* Service Lines with Images */}
+      <ServiceLines />
+      
+      {/* New Video Section */}
+      <CorporateVideo />
+
+      {/* Tech & Accreditations */}
+      <MedicalTechnology />
+      <Accreditations />
+      
+      {/* Facility Showcase */}
+      <FacilityShowcase />
+      
+      {/* Bottom Banner */}
       <section className="bg-slate-900 py-16 text-center text-white">
         <div className="container mx-auto px-6">
           <h2 className="text-2xl font-bold mb-4">Clinical Quality Assurance</h2>
