@@ -1,6 +1,7 @@
 ﻿import "./globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
+import SecondFooter from "@/components/layout/SecondFooter";
 import PremiumFooter from "@/components/layout/PremiumFooter";
 import GoogleTagManager from "@/components/seo/GoogleTagManager";
 import { companyDetails } from "@/lib/constants";
@@ -27,6 +28,11 @@ export default function RootLayout({
         <GoogleTagManager />
         <Header />
         <main className="flex-1 pt-20">{children}</main>
+        
+        {/* SEO MATRIX FOOTER */}
+        <SecondFooter />
+        
+        {/* MAIN CORPORATE FOOTER */}
         <PremiumFooter />
       </body>
     </html>

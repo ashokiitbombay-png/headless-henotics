@@ -12,12 +12,12 @@ export default function PremiumFooter() {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* =========================================
-            SECTION 1: TOP GRID (Logo, NAP, Maps & Links)
+            SECTION 1: CONTACT & MAP SPLIT LAYOUT
            ========================================= */}
-        <div className="grid lg:grid-cols-12 gap-10 mb-16 border-b border-slate-800 pb-16">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-16 border-b border-slate-800 pb-16 items-start">
           
-          {/* LEFT COLUMN: BRAND IDENTITY, NAP & MAP (Span 4) */}
-          <div className="lg:col-span-4 space-y-8">
+          {/* LEFT COLUMN: BRAND & NAP DETAILS */}
+          <div className="space-y-8">
             <Link href="/" className="inline-block group relative">
               {/* DEEP 3D LOGO BOX */}
               <div className="relative z-10 p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-black border border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.7)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.15)] transition-all duration-500 transform hover:-translate-y-1">
@@ -32,122 +32,61 @@ export default function PremiumFooter() {
             </Link>
             
             {/* NAP DETAILS BOX */}
-            <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 backdrop-blur-sm">
-               <h4 className="text-white font-bold mb-4 flex items-center gap-2 uppercase tracking-widest text-xs">
-                 <MapPin size={14} className="text-teal-400" /> Corporate Headquarters
+            <div className="bg-slate-900/50 p-8 rounded-2xl border border-slate-800 backdrop-blur-sm shadow-xl">
+               <h4 className="text-white font-bold mb-6 flex items-center gap-2 uppercase tracking-widest text-xs">
+                 <MapPin size={16} className="text-teal-400" /> Corporate Headquarters
                </h4>
-               <p className="text-slate-300 text-sm leading-relaxed mb-4">
+               <p className="text-slate-300 text-sm leading-relaxed mb-6 pl-6 border-l-2 border-slate-700">
                  <strong>Henotic Diagnostics</strong><br/>
                  Second floor, Millennium Empire, Business Park,<br/>
                  Plot No 47, D Mart Rd, Sector 15, Kharghar,<br/>
                  Navi Mumbai, Maharashtra 410210
                </p>
-               <div className="flex flex-col gap-2 text-sm">
-                 <a href="tel:08879327184" className="flex items-center gap-3 text-white hover:text-blue-400 transition font-bold">
-                   <Phone size={16} /> 08879327184 / 09372853584
+               <div className="flex flex-col gap-3 text-sm">
+                 <a href="tel:08879327184" className="flex items-center gap-3 text-white hover:text-blue-400 transition font-bold bg-slate-800/50 p-3 rounded-lg hover:bg-slate-800">
+                   <Phone size={18} className="text-blue-500" /> 08879327184 / 09372853584
                  </a>
-                 <div className="flex items-center gap-3 text-slate-400">
-                   <Clock size={16} /> Open 24 Hours
+                 <div className="flex items-center gap-3 text-slate-400 p-2">
+                   <Clock size={18} className="text-slate-500" /> Open 24 Hours
                  </div>
-                 <a href="https://henoticdiagnostics.com/" target="_blank" className="flex items-center gap-2 text-teal-400 hover:text-teal-300 transition text-xs font-semibold mt-1">
-                   <ExternalLink size={12} /> henoticdiagnostics.com
-                 </a>
-                 <a href="https://share.google/sGgNYJOKwljqxyMJx" target="_blank" className="text-xs text-blue-500 hover:underline mt-1 flex items-center gap-1">
-                   View on Google Maps <ChevronRight size={12} />
+                 <a href="https://henoticdiagnostics.com/" target="_blank" className="flex items-center gap-2 text-teal-400 hover:text-teal-300 transition text-xs font-semibold p-2">
+                   <ExternalLink size={14} /> henoticdiagnostics.com
                  </a>
                </div>
             </div>
+          </div>
 
-            {/* DEDICATED GOOGLE MAPS BOX (FIXED URL) */}
-            <div className="bg-slate-800 p-1 rounded-2xl border border-slate-700 h-56 w-full overflow-hidden shadow-inner relative group">
+          {/* RIGHT COLUMN: DEDICATED GOOGLE MAP (REDUCED HEIGHT) */}
+          <div className="w-full flex flex-col h-64 lg:h-80">
+             <div className="flex-1 bg-slate-800 p-2 rounded-3xl border border-slate-700 w-full shadow-[inset_0_2px_20px_rgba(0,0,0,0.5)] relative group overflow-hidden">
+               {/* GOOGLE APPROVED MAP EMBED */}
                <iframe 
-                 src="https://maps.google.com/maps?q=Henotic+Diagnostics,+Millennium+Empire,+Sector+15,+Kharghar,+Navi+Mumbai&hl=en&z=14&output=embed"
+                 src="https://maps.google.com/maps?q=Henotic%20Diagnostics%2C%20Kharghar%2C%20Navi%20Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed"
                  width="100%" 
                  height="100%" 
                  style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(90%)" }} 
                  allowFullScreen 
                  loading="lazy" 
                  referrerPolicy="no-referrer-when-downgrade"
-                 className="rounded-xl w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+                 className="rounded-2xl w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
                ></iframe>
-               <div className="absolute inset-0 pointer-events-none rounded-xl ring-1 ring-inset ring-slate-700/50"></div>
+               <div className="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-inset ring-slate-700/50"></div>
+               
+               {/* Map Badge */}
+               <div className="absolute bottom-4 left-4 bg-slate-900/90 backdrop-blur text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-700 shadow-lg">
+                 Locate Us
+               </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: LINKS (Span 8) */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8 text-[11px] lg:text-xs">
-            
-            {/* COLUMN 1 */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-blue-400 font-black tracking-widest mb-4 uppercase">Pathology</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['blood-tests', 'full-body-check-up', 'thyroid-function-tests', 'diabetes-hba1c', 'lipid-profile', 'liver-function-test', 'kidney-function-test'].map(s => (
-                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-teal-400 font-black tracking-widest mb-4 uppercase">Preventive Health</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['executive-health-checkup', 'master-health-checkup', 'senior-citizen-packages', 'womens-wellness'].map(s => (
-                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* COLUMN 2 */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-purple-400 font-black tracking-widest mb-4 uppercase">Radiology</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['mri-scan', 'ct-scan', 'pet-scan', 'ultrasound', 'sonography', 'dexa-bone-scan', 'mammography', 'color-doppler'].map(s => (
-                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-red-400 font-black tracking-widest mb-4 uppercase">Cardiology</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['2d-echo', 'tmt-test', 'stress-test', 'holter-monitoring', 'angiography', 'angioplasty'].map(s => (
-                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* COLUMN 3 */}
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-pink-400 font-black tracking-widest mb-4 uppercase">Mother & Child</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['pregnancy-sonography', 'obstetric-ultrasound', 'anomaly-scan', 'nt-scan', 'follicular-study', 'nipt-test', 'prenatal-test'].map(s => (
-                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-yellow-400 font-black tracking-widest mb-4 uppercase">Centers Near You</h3>
-                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
-                  {['andheri', 'bandra', 'belapur', 'borivali', 'chembur', 'colaba', 'dadar', 'dahisar', 'ghatkopar', 'goregaon'].map(s => (
-                    <li key={s}><Link href={`/centers/${s}`} className="hover:text-white transition-colors block">{s}</Link></li>
-                  ))}
-                  <li><Link href="/locations" className="text-blue-400 hover:text-blue-300 font-bold mt-2 inline-flex items-center gap-1">View All Locations <ChevronRight size={10} /></Link></li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
         </div>
 
         {/* =========================================
-            SECTION 2: SECURE PAYMENT PARTNERS (Grid Tiles)
+            SECTION 2: SECURE PAYMENT PARTNERS
            ========================================= */}
         <div className="mb-12">
            <p className="text-center text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-8">Secure Payment Partners</p>
            
-           {/* INDIVIDUAL WHITE TILES GRID */}
            <div className="flex flex-wrap justify-center gap-4">
               {[
                 { name: "Paytm", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/4cc15576-paytm-banking-henotic-diagnostics.webp" },
