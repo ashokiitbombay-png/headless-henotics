@@ -61,7 +61,7 @@ export default function PremiumFooter() {
             {/* DEDICATED GOOGLE MAPS BOX (FIXED URL) */}
             <div className="bg-slate-800 p-1 rounded-2xl border border-slate-700 h-56 w-full overflow-hidden shadow-inner relative group">
                <iframe 
-                 src="https://maps.google.com/maps?q=Henotic+Diagnostics%2C+Millennium+Empire%2C+Sector+15%2C+Kharghar%2C+Navi+Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                 src="https://maps.google.com/maps?q=Henotic+Diagnostics,+Millennium+Empire,+Sector+15,+Kharghar,+Navi+Mumbai&hl=en&z=14&output=embed"
                  width="100%" 
                  height="100%" 
                  style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(90%)" }} 
@@ -142,13 +142,13 @@ export default function PremiumFooter() {
         </div>
 
         {/* =========================================
-            SECTION 2: SECURE PAYMENT PARTNERS (White Box)
+            SECTION 2: SECURE PAYMENT PARTNERS (Grid Tiles)
            ========================================= */}
         <div className="mb-12">
-           <p className="text-center text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-6">Secure Payment Partners</p>
+           <p className="text-center text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-8">Secure Payment Partners</p>
            
-           {/* WHITE GLASS EFFECT BOX */}
-           <div className="bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl p-8 flex flex-wrap justify-center items-center gap-8 lg:gap-12 shadow-[0_10px_40px_rgba(255,255,255,0.1)]">
+           {/* INDIVIDUAL WHITE TILES GRID */}
+           <div className="flex flex-wrap justify-center gap-4">
               {[
                 { name: "Paytm", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/4cc15576-paytm-banking-henotic-diagnostics.webp" },
                 { name: "GPay", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/22f37b85-google-pay-payment-transfer-henotic-diagnostics.webp" },
@@ -159,12 +159,13 @@ export default function PremiumFooter() {
                 { name: "Visa", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/7ecc0645-visa-payment-transfer-henotic-diagnostics.webp" },
                 { name: "Paypal", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/3ffff106-paypal-banking-henotic-diagnostics.webp" }
               ].map((pay, i) => (
-                <img 
-                  key={i} 
-                  src={pay.url} 
-                  alt={pay.name} 
-                  className="h-8 lg:h-12 w-auto object-contain hover:scale-110 transition-transform duration-300 filter drop-shadow-md"
-                />
+                <div key={i} className="bg-white rounded-xl w-24 h-14 md:w-32 md:h-16 flex items-center justify-center shadow-[0_4px_12px_rgba(255,255,255,0.15)] hover:shadow-[0_8px_24px_rgba(255,255,255,0.3)] hover:-translate-y-1 transition-all duration-300">
+                  <img 
+                    src={pay.url} 
+                    alt={pay.name} 
+                    className="h-6 md:h-8 w-auto object-contain"
+                  />
+                </div>
               ))}
            </div>
         </div>
@@ -196,7 +197,7 @@ export default function PremiumFooter() {
       </div>
 
       {/* =========================================
-          FLOATING WIDGETS (Custom Icons)
+          FLOATING WIDGETS
          ========================================= */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end">
         {/* WhatsApp Button */}
