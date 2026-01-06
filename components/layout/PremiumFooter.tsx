@@ -1,188 +1,184 @@
 ﻿import Link from "next/link";
-import Image from "next/image";
-import { companyDetails, citySlugs } from "@/lib/constants";
-import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, ShieldCheck, Microscope, Activity, HeartPulse, Baby, FileText } from "lucide-react";
+import { companyDetails } from "@/lib/constants";
+import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, FileText, Clock, ExternalLink } from "lucide-react";
 
 export default function PremiumFooter() {
   return (
-    <footer className="relative bg-slate-950 text-slate-400 font-sans pt-24 pb-12 overflow-hidden border-t border-slate-900">
+    <footer className="relative bg-slate-950 text-slate-400 font-sans pt-24 overflow-hidden border-t border-slate-900 pb-32 lg:pb-16">
       
-      {/* 🔹 BACKGROUND AMBIENT GLOW */}
+      {/* Background Glow */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-teal-400 to-indigo-600 shadow-[0_0_40px_rgba(34,211,238,0.4)]"></div>
-      <div className="absolute -top-[200px] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-900/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         
         {/* =========================================
-            SECTION 1: BRAND IDENTITY & CONTACT
+            SECTION 1: TOP GRID (Logo, NAP, Maps & Links)
            ========================================= */}
-        <div className="grid lg:grid-cols-5 gap-12 mb-20 border-b border-slate-800 pb-16">
+        <div className="grid lg:grid-cols-12 gap-10 mb-16 border-b border-slate-800 pb-16">
           
-          {/* LOGO & ABOUT (Spans 2 Columns) */}
-          <div className="lg:col-span-2 space-y-8 pr-8">
-            <Link href="/" className="inline-block group">
-              <div className="relative p-2">
-                {/* 3D LOGO CONTAINER */}
-                <div className="relative w-auto h-20 flex items-center gap-4">
-                   <div className="relative w-20 h-20 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md flex items-center justify-center overflow-hidden group-hover:border-blue-500/50 transition-all duration-500">
-                      <Image 
-                        src="/images/henotic-diagnostics-logo.webp" 
-                        alt="Henotic Diagnostics Logo" 
-                        width={80} 
-                        height={80} 
-                        className="object-contain p-1"
-                      />
-                   </div>
-                   <div>
-                      <h2 className="text-3xl font-black text-white tracking-widest uppercase leading-none drop-shadow-lg">
-                        HENOTIC
-                      </h2>
-                      <p className="text-teal-400 font-bold tracking-[0.4em] text-xs uppercase mt-1">
-                        DIAGNOSTICS
-                      </p>
-                   </div>
-                </div>
+          {/* LEFT COLUMN: BRAND IDENTITY, NAP & MAP (Span 4) */}
+          <div className="lg:col-span-4 space-y-8">
+            <Link href="/" className="inline-block group relative">
+              {/* DEEP 3D LOGO BOX */}
+              <div className="relative z-10 p-6 rounded-3xl bg-gradient-to-br from-slate-900 to-black border border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.7)] hover:shadow-[0_20px_60px_rgba(34,211,238,0.15)] transition-all duration-500 transform hover:-translate-y-1">
+                 <img 
+                   src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/6d8a7750-henotic_diagnostics_logo_gedg88_e_background_removal_f_png-scaled.webp" 
+                   alt="Henotic Diagnostics" 
+                   className="w-64 lg:w-72 h-auto object-contain drop-shadow-2xl brightness-110"
+                 />
               </div>
+              {/* 3D Depth Layer */}
+              <div className="absolute inset-0 bg-blue-900/20 rounded-3xl blur-xl transform translate-y-4 -z-0"></div>
             </Link>
             
-            <p className="text-sm font-medium leading-relaxed text-slate-400 uppercase tracking-wide max-w-md">
-              Pioneering precision healthcare with 3T MRI, 128-Slice CT, and 4D Ultrasound technology. NABL Accredited and trusted by 50,000+ patients.
-            </p>
-
-            <div className="flex flex-col gap-4">
-               <div className="flex items-center gap-4 text-white">
-                 <div className="w-10 h-10 rounded-lg bg-blue-600/20 border border-blue-600/50 flex items-center justify-center text-blue-400">
-                   <Phone size={20} />
+            {/* NAP DETAILS BOX */}
+            <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 backdrop-blur-sm">
+               <h4 className="text-white font-bold mb-4 flex items-center gap-2 uppercase tracking-widest text-xs">
+                 <MapPin size={14} className="text-teal-400" /> Corporate Headquarters
+               </h4>
+               <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                 <strong>Henotic Diagnostics</strong><br/>
+                 Second floor, Millennium Empire, Business Park,<br/>
+                 Plot No 47, D Mart Rd, Sector 15, Kharghar,<br/>
+                 Navi Mumbai, Maharashtra 410210
+               </p>
+               <div className="flex flex-col gap-2 text-sm">
+                 <a href="tel:08879327184" className="flex items-center gap-3 text-white hover:text-blue-400 transition font-bold">
+                   <Phone size={16} /> 08879327184 / 09372853584
+                 </a>
+                 <div className="flex items-center gap-3 text-slate-400">
+                   <Clock size={16} /> Open 24 Hours
                  </div>
-                 <div>
-                   <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">24/7 Support</p>
-                   <a href={`tel:${companyDetails.phone[0]}`} className="text-lg font-bold tracking-widest hover:text-blue-400 transition">{companyDetails.phone[0]}</a>
-                 </div>
+                 <a href="https://henoticdiagnostics.com/" target="_blank" className="flex items-center gap-2 text-teal-400 hover:text-teal-300 transition text-xs font-semibold mt-1">
+                   <ExternalLink size={12} /> henoticdiagnostics.com
+                 </a>
+                 <a href="https://share.google/sGgNYJOKwljqxyMJx" target="_blank" className="text-xs text-blue-500 hover:underline mt-1 flex items-center gap-1">
+                   View on Google Maps <ChevronRight size={12} />
+                 </a>
                </div>
+            </div>
 
-               <div className="flex items-center gap-4 text-white">
-                 <div className="w-10 h-10 rounded-lg bg-teal-600/20 border border-teal-600/50 flex items-center justify-center text-teal-400">
-                   <MapPin size={20} />
-                 </div>
-                 <div>
-                   <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Main Center</p>
-                   <p className="text-sm font-bold tracking-wide">Sector 15, Kharghar</p>
-                 </div>
-               </div>
+            {/* DEDICATED GOOGLE MAPS BOX (FIXED URL) */}
+            <div className="bg-slate-800 p-1 rounded-2xl border border-slate-700 h-56 w-full overflow-hidden shadow-inner relative group">
+               <iframe 
+                 src="https://maps.google.com/maps?q=Henotic+Diagnostics%2C+Millennium+Empire%2C+Sector+15%2C+Kharghar%2C+Navi+Mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                 width="100%" 
+                 height="100%" 
+                 style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) contrast(90%)" }} 
+                 allowFullScreen 
+                 loading="lazy" 
+                 referrerPolicy="no-referrer-when-downgrade"
+                 className="rounded-xl w-full h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+               ></iframe>
+               <div className="absolute inset-0 pointer-events-none rounded-xl ring-1 ring-inset ring-slate-700/50"></div>
             </div>
           </div>
 
-          {/* =========================================
-              SECTION 2: SERVICE MEGA-LISTS
-             ========================================= */}
-          
-          {/* COLUMN A: PATHOLOGY & PREVENTIVE */}
-          <div>
-            <h3 className="flex items-center gap-2 text-blue-400 font-black text-sm tracking-widest mb-6 uppercase">
-              <Microscope size={16} /> Pathology
-            </h3>
-            <ul className="space-y-3 text-xs font-bold text-slate-500 uppercase tracking-wide">
-              {['blood-tests', 'full-body-check-up', 'thyroid-function-tests', 'diabetes-hba1c', 'lipid-profile', 'liver-function-test', 'kidney-function-test'].map(s => (
-                <li key={s}>
-                  <Link href={`/${s}`} className="hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-slate-700 rounded-full"></span> {s.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="flex items-center gap-2 text-teal-400 font-black text-sm tracking-widest mt-10 mb-6 uppercase">
-              <ShieldCheck size={16} /> Preventive Health
-            </h3>
-            <ul className="space-y-3 text-xs font-bold text-slate-500 uppercase tracking-wide">
-              {['executive-health-checkup', 'master-health-checkup', 'senior-citizen-packages', 'womens-wellness'].map(s => (
-                <li key={s}>
-                  <Link href={`/${s}`} className="hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-slate-700 rounded-full"></span> {s.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMN B: RADIOLOGY & CARDIOLOGY */}
-          <div>
-            <h3 className="flex items-center gap-2 text-purple-400 font-black text-sm tracking-widest mb-6 uppercase">
-              <Activity size={16} /> Radiology
-            </h3>
-            <ul className="space-y-3 text-xs font-bold text-slate-500 uppercase tracking-wide">
-              {['mri-scan', 'ct-scan', 'pet-scan', 'ultrasound', 'sonography', 'dexa-bone-scan', 'mammography', 'color-doppler'].map(s => (
-                <li key={s}>
-                  <Link href={`/${s}`} className="hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-slate-700 rounded-full"></span> {s.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="flex items-center gap-2 text-red-400 font-black text-sm tracking-widest mt-10 mb-6 uppercase">
-              <HeartPulse size={16} /> Cardiology
-            </h3>
-            <ul className="space-y-3 text-xs font-bold text-slate-500 uppercase tracking-wide">
-              {['2d-echo', 'tmt-test', 'stress-test', 'holter-monitoring', 'angiography', 'angioplasty'].map(s => (
-                <li key={s}>
-                  <Link href={`/${s}`} className="hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-slate-700 rounded-full"></span> {s.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* COLUMN C: WOMEN'S & GENETICS */}
-          <div>
-            <h3 className="flex items-center gap-2 text-pink-400 font-black text-sm tracking-widest mb-6 uppercase">
-              <Baby size={16} /> Mother & Child
-            </h3>
-            <ul className="space-y-3 text-xs font-bold text-slate-500 uppercase tracking-wide">
-              {['pregnancy-sonography', 'obstetric-ultrasound', 'anomaly-scan', 'nt-scan', 'follicular-study', 'nipt-test', 'prenatal-test'].map(s => (
-                <li key={s}>
-                  <Link href={`/${s}`} className="hover:text-white transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-slate-700 rounded-full"></span> {s.replace(/-/g, ' ')}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <h3 className="text-white font-black text-sm tracking-widest mt-10 mb-6 uppercase">
-              Centers Near You
-            </h3>
-            <div className="grid grid-cols-2 gap-2">
-               {citySlugs.slice(0, 10).map(city => (
-                 <Link key={city} href={`/blood-tests/${city}`} className="text-[10px] font-bold text-slate-600 hover:text-blue-400 transition-colors uppercase">
-                   {city}
-                 </Link>
-               ))}
+          {/* RIGHT COLUMN: LINKS (Span 8) */}
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8 text-[11px] lg:text-xs">
+            
+            {/* COLUMN 1 */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-blue-400 font-black tracking-widest mb-4 uppercase">Pathology</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['blood-tests', 'full-body-check-up', 'thyroid-function-tests', 'diabetes-hba1c', 'lipid-profile', 'liver-function-test', 'kidney-function-test'].map(s => (
+                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-teal-400 font-black tracking-widest mb-4 uppercase">Preventive Health</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['executive-health-checkup', 'master-health-checkup', 'senior-citizen-packages', 'womens-wellness'].map(s => (
+                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <Link href="/about-us" className="inline-block mt-4 text-[10px] font-bold text-blue-500 hover:text-white transition-colors uppercase border-b border-blue-500/30">
-              View All Locations →
-            </Link>
-          </div>
 
+            {/* COLUMN 2 */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-purple-400 font-black tracking-widest mb-4 uppercase">Radiology</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['mri-scan', 'ct-scan', 'pet-scan', 'ultrasound', 'sonography', 'dexa-bone-scan', 'mammography', 'color-doppler'].map(s => (
+                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-red-400 font-black tracking-widest mb-4 uppercase">Cardiology</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['2d-echo', 'tmt-test', 'stress-test', 'holter-monitoring', 'angiography', 'angioplasty'].map(s => (
+                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* COLUMN 3 */}
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-pink-400 font-black tracking-widest mb-4 uppercase">Mother & Child</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['pregnancy-sonography', 'obstetric-ultrasound', 'anomaly-scan', 'nt-scan', 'follicular-study', 'nipt-test', 'prenatal-test'].map(s => (
+                    <li key={s}><Link href={`/${s}`} className="hover:text-white transition-colors block">{s.replace(/-/g, ' ')}</Link></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-yellow-400 font-black tracking-widest mb-4 uppercase">Centers Near You</h3>
+                <ul className="space-y-2 font-semibold text-slate-500 uppercase tracking-wide">
+                  {['andheri', 'bandra', 'belapur', 'borivali', 'chembur', 'colaba', 'dadar', 'dahisar', 'ghatkopar', 'goregaon'].map(s => (
+                    <li key={s}><Link href={`/centers/${s}`} className="hover:text-white transition-colors block">{s}</Link></li>
+                  ))}
+                  <li><Link href="/locations" className="text-blue-400 hover:text-blue-300 font-bold mt-2 inline-flex items-center gap-1">View All Locations <ChevronRight size={10} /></Link></li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* =========================================
+            SECTION 2: SECURE PAYMENT PARTNERS (White Box)
+           ========================================= */}
+        <div className="mb-12">
+           <p className="text-center text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mb-6">Secure Payment Partners</p>
+           
+           {/* WHITE GLASS EFFECT BOX */}
+           <div className="bg-white/95 backdrop-blur-xl border border-white/20 rounded-2xl p-8 flex flex-wrap justify-center items-center gap-8 lg:gap-12 shadow-[0_10px_40px_rgba(255,255,255,0.1)]">
+              {[
+                { name: "Paytm", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/4cc15576-paytm-banking-henotic-diagnostics.webp" },
+                { name: "GPay", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/22f37b85-google-pay-payment-transfer-henotic-diagnostics.webp" },
+                { name: "BHIM", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/9ee511bb-bhim-upi-transfer-banking-henotic-diagnostics.webp" },
+                { name: "Amex", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/8982a1eb-american-experss-payment-transfer-henotic-diagnostics.webp" },
+                { name: "Amazon", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/57673992-amazon-pay-payment-transfer-henotic-diagnostics.webp" },
+                { name: "Cards", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/d412e583-all-debitcards-creditcards-payment-transfer-henotic-diagnostics.webp" },
+                { name: "Visa", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/7ecc0645-visa-payment-transfer-henotic-diagnostics.webp" },
+                { name: "Paypal", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/3ffff106-paypal-banking-henotic-diagnostics.webp" }
+              ].map((pay, i) => (
+                <img 
+                  key={i} 
+                  src={pay.url} 
+                  alt={pay.name} 
+                  className="h-8 lg:h-12 w-auto object-contain hover:scale-110 transition-transform duration-300 filter drop-shadow-md"
+                />
+              ))}
+           </div>
         </div>
 
         {/* =========================================
             SECTION 3: FOOTER BOTTOM
            ========================================= */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8">
-           <div className="text-[10px] font-bold text-slate-600 tracking-[0.2em] uppercase">
-             &copy; 2026 Henotic Diagnostics. All Rights Reserved.
+        <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+           <div className="text-[10px] font-bold text-slate-600 tracking-[0.2em] uppercase text-center md:text-left">
+             © {new Date().getFullYear()} Henotic Diagnostics. All Rights Reserved.
            </div>
-           
            <div className="flex gap-4">
-              {companyDetails.socials.map((social) => (
-                <a 
-                  key={social.name} 
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center hover:border-blue-500 hover:text-white text-slate-500 transition-all"
-                >
+              {companyDetails.socials.map((social, i) => (
+                <a key={i} href={social.url} target="_blank" className="w-8 h-8 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center hover:border-blue-500 hover:text-white text-slate-500 transition-all">
                   {social.name === "Facebook" && <Facebook size={14} />}
                   {social.name === "Twitter" && <Twitter size={14} />}
                   {social.name === "Instagram" && <Instagram size={14} />}
@@ -190,17 +186,51 @@ export default function PremiumFooter() {
                 </a>
               ))}
            </div>
-           
-           <div className="flex gap-6 text-[10px] font-bold text-slate-600 tracking-widest uppercase items-center">
-              <Link href="/sitemap.xml" className="hover:text-white transition-colors flex items-center gap-1">
-                <FileText size={12} /> Sitemap
-              </Link>
+           <div className="flex gap-6 text-[10px] font-bold text-slate-600 tracking-widest uppercase">
+              <Link href="/sitemap.xml" className="hover:text-white transition-colors flex items-center gap-1"><FileText size={12} /> Sitemap</Link>
               <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+              <Link href="#" className="hover:text-white transition-colors">Terms</Link>
            </div>
         </div>
 
       </div>
+
+      {/* =========================================
+          FLOATING WIDGETS (Custom Icons)
+         ========================================= */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-4 items-end">
+        {/* WhatsApp Button */}
+        <a 
+          href="https://wa.me/918879327184?text=Hi,%20I%20want%20to%20book%20an%20appointment." 
+          target="_blank" 
+          className="group flex items-center justify-end relative"
+        >
+          <span className="absolute right-16 bg-white text-slate-900 text-xs font-bold px-3 py-1 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Chat on WhatsApp
+          </span>
+          <img 
+            src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/c65e4696-whatsapp.webp" 
+            alt="WhatsApp" 
+            className="w-14 h-14 hover:scale-110 transition-transform duration-300 drop-shadow-2xl"
+          />
+        </a>
+
+        {/* Call Button */}
+        <a 
+          href="tel:08879327184" 
+          className="group flex items-center justify-end relative"
+        >
+          <span className="absolute right-16 bg-white text-slate-900 text-xs font-bold px-3 py-1 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            Call Now
+          </span>
+          <img 
+            src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/0f754a41-call-now.webp" 
+            alt="Call Now" 
+            className="w-14 h-14 hover:scale-110 transition-transform duration-300 animate-[pulse_2s_infinite] drop-shadow-2xl"
+          />
+        </a>
+      </div>
+
     </footer>
   );
 }
