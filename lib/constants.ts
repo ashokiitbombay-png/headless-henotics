@@ -5,17 +5,15 @@
 ];
 
 export const serviceSlugs = [
-  // Core Imaging
+  // New Genomics & Wellness
+  "gut-microbiome-test", "whole-exome-sequencing", "dna-testing",
+
+  // Existing Services
   "mri-scan", "ct-scan", "pet-scan", "ultrasound", "sonography", "digital-xray",
-  
-  // Cardiology & Vascular
   "angiography", "angioplasty", "2d-echo", "tmt-test", "stress-test", "color-doppler", "holter-monitoring",
-  
-  // Fetal Medicine / Pregnancy
   "pregnancy-sonography", "obstetric-ultrasound", "anomaly-scan", "nt-scan", "follicular-study",
-  
-  // Women's Health & Genetics
-  "mammography", "nipt-test", "prenatal-test", "full-body-checkup", "blood-tests"
+  "mammography", "nipt-test", "prenatal-test", "full-body-checkup", "blood-tests",
+  "dexa-bone-scan"
 ];
 
 export const companyDetails = {
