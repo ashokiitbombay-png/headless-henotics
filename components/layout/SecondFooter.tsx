@@ -5,10 +5,6 @@ import { useState } from "react";
 import { ChevronDown, MapPin, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-// ==========================================
-// 1. DATA CONFIGURATION
-// ==========================================
-
 const REGIONS = {
   "South Mumbai": ["colaba", "cuffe-parade", "fort", "churchgate", "marine-lines", "nariman-point", "worli", "parel", "lower-parel", "mahalaxmi", "byculla", "dadar"],
   "Central Mumbai": ["sion", "kurla", "chembur", "ghatkopar", "vikhroli", "kanjurmarg", "bhandup", "mulund"],
@@ -26,121 +22,30 @@ const SERVICE_CATEGORIES = {
   "Prenatal & Genetic": ["prenatal-test", "nipt-test", "nips-test", "nippt"],
 };
 
-// ==========================================
-// 2. COMPONENT
-// ==========================================
-
 export default function SecondFooter() {
-  // State to track which Region is open
   const [openRegion, setOpenRegion] = useState<string | null>("Navi Mumbai");
-
-  // Helper to format text (e.g. "mri-scan" -> "MRI Scan")
   const formatText = (slug: string) => slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
 
   return (
-    <footer className="bg-slate-900 border-t border-slate-800 text-slate-300 py-16 font-sans">
-      <div className="container mx-auto px-6">
-        
-        {/* HEADER */}
-        <div className="mb-10 text-center">
-          <h2 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest mb-2">
-            <span className="text-blue-500">Global</span> Service Directory
-          </h2>
-          <p className="text-xs text-slate-500 uppercase tracking-widest">
-            Find Specialists & Diagnostics Near You
-          </p>
-        </div>
-
-        {/* REGION TABS / ACCORDION */}
-        <div className="grid lg:grid-cols-5 gap-2 mb-8">
-          {Object.keys(REGIONS).map((region) => (
-            <button
-              key={region}
-              onClick={() => setOpenRegion(openRegion === region ? null : region)}
-              className={cn(
-                "px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all border border-transparent",
-                openRegion === region 
-                  ? "bg-blue-600 text-white shadow-lg border-blue-500" 
-                  : "bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white"
-              )}
-            >
-              {region}
-            </button>
-          ))}
-        </div>
-
-        {/* DYNAMIC CONTENT AREA */}
-        <div className="bg-slate-950 border border-slate-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
-          
-          {/* Subtle Background Grid */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-          
+    <footer className="text-white py-16 font-sans relative overflow-hidden" style={{ background: "linear-gradient(90deg, #4568dc 0%, #b06ab3 100%)" }}>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="mb-10 text-center"><h2 className="text-xl md:text-2xl font-bold text-white uppercase tracking-widest mb-2 drop-shadow-md">Global Service Directory</h2><div className="w-24 h-1 bg-white mx-auto rounded-full opacity-50"></div></div>
+        <div className="flex flex-wrap justify-center gap-3 mb-8">{Object.keys(REGIONS).map((region) => (<button key={region} onClick={() => setOpenRegion(openRegion === region ? null : region)} className={cn("px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all border", openRegion === region ? "bg-white text-[#b06ab3] border-white shadow-lg scale-105" : "bg-white/10 text-white border-white/20 hover:bg-white/20")}>{region}</button>))}</div>
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 md:p-8 shadow-2xl">
           {openRegion && (
-            <div className="relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              
-              <div className="flex items-center gap-3 mb-8 border-b border-slate-800 pb-4">
-                <MapPin className="text-blue-500" size={20} />
-                <h3 className="text-xl font-bold text-white">{openRegion} Locations</h3>
-              </div>
-
-              {/* LOCATIONS GRID */}
-              <div className="grid gap-6">
+            <div className="animate-in fade-in duration-500">
+              <div className="flex items-center gap-3 mb-6 border-b border-white/20 pb-4"><MapPin className="text-white" size={20} /><h3 className="text-xl font-bold text-white">{openRegion} Locations</h3></div>
+              <div className="grid gap-4">
                 {REGIONS[openRegion as keyof typeof REGIONS].map((location) => (
-                  <details 
-                    key={location} 
-                    className="group border border-slate-800 bg-slate-900/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-blue-500/50 open:bg-slate-900 open:border-blue-500"
-                  >
-                    
-                    {/* LOCATION SUMMARY (CLICKABLE) */}
-                    <summary className="flex items-center justify-between p-4 cursor-pointer select-none">
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-blue-500 group-hover:animate-pulse"></div>
-                        <span className="text-sm font-bold text-slate-200 uppercase tracking-wide group-hover:text-white">
-                          {formatText(location)}
-                        </span>
-                      </div>
-                      <ChevronDown size={16} className="text-slate-500 transition-transform duration-300 group-open:rotate-180 group-open:text-blue-500" />
-                    </summary>
-
-                    {/* SERVICES MATRIX FOR THIS LOCATION */}
-                    <div className="p-6 pt-0 border-t border-slate-800/50 mt-2">
-                       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">
-                          {Object.entries(SERVICE_CATEGORIES).map(([category, services]) => (
-                            <div key={category}>
-                              <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                <Activity size={10} /> {category}
-                              </h4>
-                              <ul className="space-y-2">
-                                {services.map((service) => (
-                                  <li key={service}>
-                                    <Link 
-                                      href={`/${service}/${location}`}
-                                      className="block text-[11px] font-medium text-slate-500 hover:text-white transition-colors hover:translate-x-1 duration-200"
-                                      title={`${formatText(service)} in ${formatText(location)}`}
-                                    >
-                                      {formatText(service)}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                       </div>
-                    </div>
-
+                  <details key={location} className="group border border-white/20 bg-white/5 rounded-xl overflow-hidden transition-all hover:bg-white/10 open:bg-white/10 open:border-white/40">
+                    <summary className="flex items-center justify-between p-4 cursor-pointer select-none"><div className="flex items-center gap-3"><div className="w-2 h-2 rounded-full bg-white"></div><span className="text-sm font-bold text-white uppercase tracking-wide">{formatText(location)}</span></div><ChevronDown size={16} className="text-white/70 group-open:rotate-180 transition-transform" /></summary>
+                    <div className="p-6 pt-0 border-t border-white/10 mt-2"><div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-4">{Object.entries(SERVICE_CATEGORIES).map(([category, services]) => (<div key={category}><h4 className="text-[10px] font-black text-white/80 uppercase tracking-widest mb-3 flex items-center gap-2"><Activity size={10} /> {category}</h4><ul className="space-y-1">{services.map((service) => (<li key={service}><Link href={`/${service}/${location}`} className="block text-[11px] font-medium text-white/70 hover:text-white transition-colors hover:translate-x-1 duration-200">{formatText(service)}</Link></li>))}</ul></div>))}</div></div>
                   </details>
                 ))}
               </div>
             </div>
           )}
-
-          {!openRegion && (
-            <div className="text-center py-20 text-slate-600">
-              <p>Select a region above to view centers and services.</p>
-            </div>
-          )}
         </div>
-
       </div>
     </footer>
   );

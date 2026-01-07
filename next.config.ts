@@ -1,30 +1,15 @@
 ﻿import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Correct Root-Level Configuration
+  allowedDevOrigins: ["localhost", "192.168.29.182"],
+
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cms.henoticdiagnostics.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "henoticdiagnostics.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "secure.gravatar.com", // Common for WP avatars
-        pathname: "/**",
-      }
+      { protocol: "https", hostname: "storage.googleapis.com" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      { protocol: "http", hostname: "googleusercontent.com" }
     ],
-  },
-  // Optional: Enable logging for debugging image issues
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
   },
 };
 
