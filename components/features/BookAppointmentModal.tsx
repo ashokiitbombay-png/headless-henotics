@@ -34,6 +34,30 @@ const ACCREDITATIONS = [
   { name: "NABH", url: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/fb54c3da-nabh-certified-henotic-diagnostics.webp" }
 ];
 
+// --- EXTRACTED COMPONENT (Fixes Focus Issue) ---
+const InputGroup = ({ icon: Icon, label, type = "text", placeholder, value, onChange }: any) => (
+  <div className="space-y-1.5 group">
+    <label className={cn("text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors", value ? "text-blue-600" : "text-slate-500")}>
+      <Icon size={12} className={cn(value ? "text-blue-600" : "text-slate-400")} /> {label}
+    </label>
+    <div className="relative">
+      <input 
+        type={type} 
+        placeholder={placeholder} 
+        className={cn(
+          "w-full bg-white border rounded-xl px-4 py-3.5 pl-10 focus:ring-2 focus:ring-[#52cffe] outline-none transition-all duration-300 text-sm font-bold text-gray-900 placeholder:text-gray-400 shadow-sm",
+          value ? "border-blue-400 bg-blue-50/20" : "border-slate-200 group-hover:border-slate-300"
+        )}
+        onChange={onChange}
+        value={value}
+      />
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-300">
+         {value ? <CheckCircle2 size={16} className="text-blue-600" /> : <div className="w-4 h-4 rounded-full border-2 border-slate-300"></div>}
+      </div>
+    </div>
+  </div>
+);
+
 interface BookAppointmentModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -86,29 +110,10 @@ export default function BookAppointmentModal({ isOpen, onClose }: BookAppointmen
     window.open(`https://wa.me/918879327184?text=${encodeURIComponent(message)}`, "_blank");
   };
 
-  // 4. Input Helper
-  const InputGroup = ({ icon: Icon, label, type = "text", placeholder, value, field }: any) => (
-    <div className="space-y-1.5 group">
-      <label className={cn("text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors", value ? "text-blue-600" : "text-slate-500")}>
-        <Icon size={12} className={cn(value ? "text-blue-600" : "text-slate-400")} /> {label}
-      </label>
-      <div className="relative">
-        <input 
-          type={type} 
-          placeholder={placeholder} 
-          className={cn(
-            "w-full bg-white border rounded-xl px-4 py-3.5 pl-10 focus:ring-2 focus:ring-[#52cffe] outline-none transition-all duration-300 text-sm font-bold text-gray-900 placeholder:text-gray-400 shadow-sm",
-            value ? "border-blue-400 bg-blue-50/20" : "border-slate-200 group-hover:border-slate-300"
-          )}
-          onChange={(e) => setFormData({...formData, [field]: e.target.value})}
-          value={value}
-        />
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-colors duration-300">
-           {value ? <CheckCircle2 size={16} className="text-blue-600" /> : <div className="w-4 h-4 rounded-full border-2 border-slate-300"></div>}
-        </div>
-      </div>
-    </div>
-  );
+  // Helper to update state
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   return (
     // Z-Index 9999 to ensure visibility over header
@@ -202,11 +207,11 @@ export default function BookAppointmentModal({ isOpen, onClose }: BookAppointmen
             <form className="space-y-4 md:space-y-5" onSubmit={(e) => e.preventDefault()}>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <InputGroup icon={User} label="Patient Name" placeholder="Enter Full Name" field="name" value={formData.name} />
-                <InputGroup icon={Phone} label="Mobile Number" type="tel" placeholder="+91" field="phone" value={formData.phone} />
+                <InputGroup icon={User} label="Patient Name" placeholder="Enter Full Name" value={formData.name} onChange={(e: any) => handleChange("name", e.target.value)} />
+                <InputGroup icon={Phone} label="Mobile Number" type="tel" placeholder="+91" value={formData.phone} onChange={(e: any) => handleChange("phone", e.target.value)} />
               </div>
 
-              <InputGroup icon={FileText} label="Test Name (Optional)" placeholder="e.g. MRI Brain, Blood Test" field="test" value={formData.test} />
+              <InputGroup icon={FileText} label="Test Name (Optional)" placeholder="e.g. MRI Brain, Blood Test" value={formData.test} onChange={(e: any) => handleChange("test", e.target.value)} />
 
                {/* Location Select */}
                <div className="space-y-1.5 group">
@@ -220,7 +225,7 @@ export default function BookAppointmentModal({ isOpen, onClose }: BookAppointmen
                        "w-full bg-white border rounded-xl px-4 py-3.5 pl-10 appearance-none focus:ring-2 focus:ring-[#52cffe] outline-none transition text-sm font-bold text-gray-900 shadow-sm cursor-pointer", 
                        formData.location ? "border-blue-400 bg-blue-50/20" : "border-slate-200"
                      )} 
-                     onChange={(e) => setFormData({...formData, location: e.target.value})}
+                     onChange={(e) => handleChange("location", e.target.value)}
                    >
                      <option value="" disabled>-- Tap to Select Location --</option>
                      {LOCATIONS.map(loc => (
@@ -235,8 +240,8 @@ export default function BookAppointmentModal({ isOpen, onClose }: BookAppointmen
                </div>
 
               <div className="grid grid-cols-2 gap-4">
-                 <InputGroup icon={Calendar} label="Date" type="date" field="date" value={formData.date} />
-                 <InputGroup icon={Clock} label="Time" type="time" field="time" value={formData.time} />
+                 <InputGroup icon={Calendar} label="Date" type="date" value={formData.date} onChange={(e: any) => handleChange("date", e.target.value)} />
+                 <InputGroup icon={Clock} label="Time" type="time" value={formData.time} onChange={(e: any) => handleChange("time", e.target.value)} />
               </div>
 
               {/* WhatsApp Submit Button */}
