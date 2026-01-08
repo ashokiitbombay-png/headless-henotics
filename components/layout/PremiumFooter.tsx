@@ -8,11 +8,11 @@ export default function PremiumFooter() {
       className="relative text-white font-sans pt-24 pb-32 lg:pb-16"
       style={{
         background: "linear-gradient(90deg, #16bffd 0%, #cb3066 100%)",
-        transform: "translateZ(0)" // Forces GPU Layer to stop flickering
+        transform: "translateZ(0)" // Fixes mobile wobble
       }}
     >
       
-      {/* Texture Overlay (Optimized) */}
+      {/* Texture Overlay */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay pointer-events-none"></div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-20">
@@ -121,6 +121,42 @@ export default function PremiumFooter() {
            </div>
         </div>
       </div>
+
+      {/* --- PREMIUM FLOATING WIDGETS --- */}
+      <div className="fixed bottom-6 right-6 z-[9999] flex flex-col gap-4 items-end pointer-events-none">
+        
+        {/* WhatsApp Widget */}
+        <a 
+          href="https://wa.me/918879327184" 
+          target="_blank" 
+          className="group relative transition-transform hover:scale-110 duration-300 pointer-events-auto"
+          aria-label="Chat on WhatsApp"
+        >
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-green-500 blur-xl opacity-0 group-hover:opacity-40 rounded-full transition-opacity duration-300"></div>
+          <img 
+             src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/c65e4696-whatsapp.webp" 
+             alt="WhatsApp" 
+             className="w-14 h-14 drop-shadow-2xl relative z-10" 
+          />
+        </a>
+
+        {/* Call Now Widget */}
+        <a 
+          href="tel:08879327184" 
+          className="group relative transition-transform hover:scale-110 duration-300 pointer-events-auto"
+          aria-label="Call Now"
+        >
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-blue-500 blur-xl opacity-0 group-hover:opacity-40 rounded-full transition-opacity duration-300"></div>
+          <img 
+            src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/0f754a41-call-now.webp" 
+            alt="Call Now" 
+            className="w-14 h-14 drop-shadow-2xl animate-[pulse_2s_infinite] relative z-10" 
+          />
+        </a>
+      </div>
+
     </footer>
   );
 }
