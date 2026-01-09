@@ -6,7 +6,8 @@ import { TARGET_LOCATIONS, slugify, unslugify } from "@/lib/locations";
 import AppointmentForm from "@/components/AppointmentForm"; 
 import { 
   CheckCircle2, Star, Bone, Activity, CalendarCheck, Phone, ShieldCheck, 
-  Clock, FileText, Smartphone, User, Stethoscope, Microscope, Zap, ChevronDown 
+  Clock, FileText, Smartphone, User, Stethoscope, Microscope, Zap, ChevronDown, 
+  Home, ChevronRight, MapPin 
 } from "lucide-react";
 
 // --- CONFIGURATION ---
@@ -57,15 +58,44 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
   if (!TARGET_LOCATIONS.some(loc => slugify(loc) === citySlug)) return notFound();
 
   const serviceDisplay = resolvedParams.service === "dexa-bone-scan" ? "DEXA Bone Scan" : "BMD DEXA Scan";
+  const serviceLink = `/${resolvedParams.service}`;
+  const currentLocationLink = `/${resolvedParams.service}/${citySlug}`;
+
+  // BREADCRUMB SCHEMA JSON
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://henoticdiagnostics.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": serviceDisplay,
+        "item": `https://henoticdiagnostics.com${serviceLink}`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": cityName,
+        "item": `https://henoticdiagnostics.com${currentLocationLink}`
+      }
+    ]
+  };
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans text-slate-900">
       
-      {/* LOCAL BUSINESS SCHEMA */}
+      {/* JSON-LD SCHEMAS */}
+      <Script id="schema-breadcrumb" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       <Script id="schema-local" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ 
           "@context": "https://schema.org", "@type": "MedicalClinic", 
           "name": `Henotic Diagnostics - ${serviceDisplay} Center`, 
-          "url": `https://henoticdiagnostics.com/${resolvedParams.service}/${citySlug}`, 
+          "url": `https://henoticdiagnostics.com${currentLocationLink}`, 
           "address": { "@type": "PostalAddress", "addressLocality": cityName, "addressRegion": "Maharashtra", "addressCountry": "IN" }, 
           "medicalSpecialty": "Radiology",
           "priceRange": "₹1800-₹5000",
@@ -89,6 +119,25 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
           <div className="w-full max-w-md mx-auto lg:ml-auto"><AppointmentForm defaultLocation={cityName} testName={serviceDisplay} /></div>
         </div>
       </section>
+
+      {/* --- VISIBLE GRADIENT BREADCRUMB BAR --- */}
+      <nav className="w-full shadow-md relative z-20" style={{ backgroundImage: "linear-gradient(to right, #4568dc, #b06ab3)" }}>
+        <div className="container mx-auto px-4 py-3">
+          <ol className="flex items-center gap-2 text-xs md:text-sm font-bold text-white uppercase tracking-wider overflow-x-auto whitespace-nowrap">
+            <li className="flex items-center gap-1 hover:text-yellow-300 transition-colors">
+              <Link href="/" className="flex items-center gap-1"><Home size={14} /> Home</Link>
+            </li>
+            <ChevronRight size={14} className="text-white/60" />
+            <li className="flex items-center gap-1 hover:text-yellow-300 transition-colors">
+              <Link href={serviceLink}>{serviceDisplay}</Link>
+            </li>
+            <ChevronRight size={14} className="text-white/60" />
+            <li className="text-yellow-300 flex items-center gap-1">
+              <MapPin size={14} /> {cityName}
+            </li>
+          </ol>
+        </div>
+      </nav>
 
       {/* --- SCIENTIFIC DETAILS & MEDICAL CONTEXT --- */}
       <section className="py-20 bg-white">
