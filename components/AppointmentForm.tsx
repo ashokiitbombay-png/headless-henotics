@@ -1,23 +1,15 @@
 ﻿"use client";
 
 import React, { useState, useEffect } from "react";
-import { Smartphone, ArrowRight, MapPin, Calendar, Clock, User, Phone } from "lucide-react";
+import { Smartphone, ArrowRight, MapPin, User, Phone, Calendar, Clock, ShieldCheck } from "lucide-react";
+import { TARGET_LOCATIONS } from "@/lib/locations";
 
-// Full Location List
-const ALL_LOCATIONS = [
-  "Colaba", "Cuffe Parade", "Fort", "Churchgate", "Marine Lines", "Nariman Point", "Worli", "Parel", "Lower Parel", "Mahalaxmi", "Byculla", "Dadar",
-  "Sion", "Kurla", "Chembur", "Ghatkopar", "Vikhroli", "Kanjurmarg", "Bhandup", "Mulund",
-  "Bandra", "Khar", "Santacruz", "Vile Parle", "Andheri", "Jogeshwari", "Goregaon", "Malad", "Kandivali", "Borivali", "Dahisar",
-  "Kurla East", "Chembur East", "Ghatkopar East", "Vikhroli East", "Mulund East",
-  "Vashi", "Sanpada", "Juinagar", "Nerul", "Seawoods", "CBD Belapur", "Kharghar", "Kamothe", "Kalamboli", "Panvel", "New Panvel", "Taloja", "Ghansoli", "Kopar Khairane", "Airoli", "Turbhe"
-];
-
-const BADGES = [
-  "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b027e422-nabl-certified-henotic-diagnostics.webp",
-  "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b04115be-iso-certified-henotic-diagnostics.webp",
-  "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b3a1aaeb-aerb-certified-henotic-diagnostics.webp",
-  "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/3a45d45f-pcpndt-certified-henotic-diagnostics.webp",
-  "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/fb54c3da-nabh-certified-henotic-diagnostics.webp"
+const ACCREDITATIONS = [
+  { name: "NABL", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b027e422-nabl-certified-henotic-diagnostics.webp" },
+  { name: "ISO", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b04115be-iso-certified-henotic-diagnostics.webp" },
+  { name: "AERB", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b3a1aaeb-aerb-certified-henotic-diagnostics.webp" },
+  { name: "PCPNDT", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/3a45d45f-pcpndt-certified-henotic-diagnostics.webp" },
+  { name: "NABH", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/fb54c3da-nabh-certified-henotic-diagnostics.webp" }
 ];
 
 export default function AppointmentForm({ defaultLocation, testName }: { defaultLocation?: string, testName?: string }) {
@@ -26,7 +18,6 @@ export default function AppointmentForm({ defaultLocation, testName }: { default
     name: "", mobile: "", test: testName || "DEXA Bone Scan", center: defaultLocation || "", date: "", time: ""
   });
 
-  // Calculate Progress
   useEffect(() => {
     const filled = Object.values(formData).filter(val => val !== "").length;
     setProgress(Math.round((filled / 6) * 100));
@@ -37,80 +28,94 @@ export default function AppointmentForm({ defaultLocation, testName }: { default
   };
 
   const handleWhatsApp = () => {
-    const msg = `*Premium Appointment Request*%0A%0AName: ${formData.name}%0AMobile: ${formData.mobile}%0ATest: ${formData.test}%0ACenter: ${formData.center}%0ADate: ${formData.date}%0ATime: ${formData.time}`;
+    const msg = `*Official Booking Request*%0A%0AName: ${formData.name}%0AMobile: ${formData.mobile}%0ATest: ${formData.test}%0ACenter: ${formData.center}%0ADate: ${formData.date}%0ATime: ${formData.time}`;
     window.open(`https://wa.me/918879327184?text=${msg}`, '_blank');
   };
 
   return (
-    <div id="booking-form" className="rounded-[2rem] shadow-2xl overflow-hidden relative z-20 transform transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+    <div id="booking-form" className="rounded-[2.5rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] overflow-hidden relative z-20 transform transition-all duration-500 hover:scale-[1.01]"
          style={{ backgroundImage: "linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)" }}>
       
       {/* HEADER */}
-      <div className="p-8 pb-4 text-white text-center">
-        <h3 className="text-3xl font-extrabold mb-2 drop-shadow-md">Official Booking Portal</h3>
-        <p className="text-xs font-semibold bg-white/20 inline-block px-3 py-1 rounded-full backdrop-blur-sm border border-white/20">
-          Excellence in Diagnostics | 12+ Years Precision
-        </p>
+      <div className="pt-8 px-8 pb-4 text-white text-center">
+        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/30 mb-4 shadow-lg">
+           <ShieldCheck size={14} className="text-white" />
+           <span className="text-[10px] font-black uppercase tracking-[0.15em]">Official Booking Portal</span>
+        </div>
+        <h3 className="text-3xl md:text-4xl font-black mb-2 drop-shadow-md tracking-tight">Excellence in Diagnostics</h3>
+        <p className="text-xs md:text-sm font-medium text-white/90 leading-relaxed max-w-xs mx-auto">12+ Years of Precision. NABL Accredited. <br/>Trusted by leading specialists.</p>
       </div>
 
-      {/* PROGRESS BAR */}
-      <div className="px-8">
-        <div className="flex justify-between text-[10px] font-bold text-white mb-1 uppercase tracking-wider">
-          <span>Completion</span><span>{progress}% Filled</span>
+      {/* DYNAMIC PROGRESS BAR */}
+      <div className="px-8 mt-4">
+        <div className="flex justify-between text-[10px] font-bold text-white mb-2 uppercase tracking-wider">
+          <span>Completion</span><span>{progress}%</span>
         </div>
-        <div className="bg-black/20 h-2 rounded-full mb-6 backdrop-blur-sm overflow-hidden border border-white/10">
-          <div className="bg-gradient-to-r from-green-300 to-green-400 h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_15px_rgba(74,222,128,0.8)]" style={{ width: `${progress}%` }}></div>
+        <div className="bg-black/20 h-3 rounded-full mb-6 backdrop-blur-sm overflow-hidden border border-white/10 shadow-inner">
+          <div className="bg-gradient-to-r from-green-300 to-emerald-400 h-full rounded-full transition-all duration-700 ease-out shadow-[0_0_20px_rgba(74,222,128,0.6)] relative" style={{ width: `${progress}%` }}>
+             <div className="absolute top-0 right-0 h-full w-4 bg-white/40 blur-[4px]"></div>
+          </div>
         </div>
       </div>
 
       {/* FORM FIELDS */}
-      <div className="px-8 space-y-4">
+      <div className="px-8 space-y-4 pb-8">
         <div className="relative group">
-          <User className="absolute left-3 top-3.5 text-white/70" size={18} />
-          <input name="name" placeholder="Patient Name" onChange={handleChange} className="w-full bg-white/20 border border-white/30 rounded-xl pl-10 pr-4 py-3 placeholder-white/80 text-white focus:bg-white/30 outline-none backdrop-blur-sm transition-all focus:border-white/60 font-medium" />
+          <User className="absolute left-4 top-3.5 text-white/80" size={18} />
+          <input name="name" placeholder="Patient Name" onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-12 pr-4 py-3 placeholder-white/70 text-white focus:bg-white/30 outline-none backdrop-blur-md transition-all font-semibold shadow-sm focus:border-white focus:ring-2 focus:ring-white/20" />
         </div>
 
         <div className="relative group">
-          <Phone className="absolute left-3 top-3.5 text-white/70" size={18} />
-          <input type="tel" name="mobile" placeholder="Mobile Number" onChange={handleChange} className="w-full bg-white/20 border border-white/30 rounded-xl pl-10 pr-4 py-3 placeholder-white/80 text-white focus:bg-white/30 outline-none backdrop-blur-sm transition-all focus:border-white/60 font-medium" />
+          <Phone className="absolute left-4 top-3.5 text-white/80" size={18} />
+          <input type="tel" name="mobile" placeholder="Mobile Number" onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-12 pr-4 py-3 placeholder-white/70 text-white focus:bg-white/30 outline-none backdrop-blur-md transition-all font-semibold shadow-sm focus:border-white focus:ring-2 focus:ring-white/20" />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
            <div className="relative group">
-             <input type="text" name="test" value={formData.test} readOnly className="w-full bg-white/10 border border-white/30 rounded-xl px-4 py-3 text-white/90 cursor-not-allowed text-xs font-bold uppercase tracking-wide" />
+             <input type="text" name="test" value={formData.test} readOnly className="w-full bg-white/10 border border-white/30 rounded-2xl px-4 py-3 text-white/90 cursor-not-allowed text-xs font-bold uppercase tracking-wide text-center" />
            </div>
            <div className="relative group">
-             <MapPin className="absolute left-3 top-3.5 text-white/70" size={18} />
-             <select name="center" value={formData.center} onChange={handleChange} className="w-full bg-white/20 border border-white/30 rounded-xl pl-10 pr-4 py-3 text-white outline-none backdrop-blur-sm appearance-none cursor-pointer font-medium text-sm">
+             <MapPin className="absolute left-3 top-3.5 text-white/80" size={18} />
+             <select name="center" value={formData.center} onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-10 pr-4 py-3 text-white outline-none backdrop-blur-md appearance-none cursor-pointer font-semibold text-sm shadow-sm focus:border-white focus:ring-2 focus:ring-white/20">
                 <option className="text-slate-900" value="">Select Center</option>
-                {ALL_LOCATIONS.map(l => <option key={l} className="text-slate-900" value={l}>{l}</option>)}
+                {TARGET_LOCATIONS.map(l => <option key={l} className="text-slate-900" value={l}>{l}</option>)}
              </select>
            </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div className="relative group">
-            <input type="date" name="date" onChange={handleChange} className="w-full bg-white/20 border border-white/30 rounded-xl px-3 py-3 text-white outline-none backdrop-blur-sm font-medium text-sm" />
+            <Calendar className="absolute left-3 top-3.5 text-white/80" size={16} />
+            <input type="date" name="date" onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-10 pr-2 py-3 text-white outline-none backdrop-blur-md font-medium text-xs shadow-sm focus:border-white uppercase" />
           </div>
           <div className="relative group">
-            <input type="time" name="time" onChange={handleChange} className="w-full bg-white/20 border border-white/30 rounded-xl px-3 py-3 text-white outline-none backdrop-blur-sm font-medium text-sm" />
+            <Clock className="absolute left-3 top-3.5 text-white/80" size={16} />
+            <input type="time" name="time" onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-10 pr-2 py-3 text-white outline-none backdrop-blur-md font-medium text-xs shadow-sm focus:border-white" />
           </div>
         </div>
 
-        <button onClick={handleWhatsApp} className="w-full mt-6 bg-[#25D366] hover:bg-[#1ebc57] text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 group transition-all transform hover:scale-[1.02] border border-white/20">
-           <Smartphone className="fill-white" size={24} /> 
-           <span>Confirm via WhatsApp</span>
-           <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
+        <button onClick={handleWhatsApp} className="w-full mt-6 bg-[#25D366] hover:bg-[#20bd5a] text-white font-black py-4 rounded-2xl shadow-[0_10px_20px_rgba(37,211,102,0.4)] flex items-center justify-center gap-3 group transition-all transform hover:-translate-y-1 active:scale-95 border border-white/20 relative overflow-hidden">
+           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></div>
+           <Smartphone className="fill-white relative z-10" size={24} /> 
+           <span className="relative z-10 text-lg tracking-tight">Confirm Appointment</span>
         </button>
-        <p className="text-center text-[10px] mt-2 text-white/80 font-medium uppercase tracking-widest">Secure SSL • Instant Confirmation</p>
+        
+        <p className="text-center text-[10px] mt-3 text-white/80 font-bold uppercase tracking-widest flex justify-center items-center gap-1 opacity-80">
+          <ShieldCheck size={10}/> Secure 256-bit SSL Data
+        </p>
       </div>
       
-      {/* ACCREDITATION FOOTER */}
-      <div className="mt-8 py-4 px-4 bg-gradient-to-r from-slate-900/90 to-slate-800/90 backdrop-blur-md border-t border-white/10">
-         <p className="text-center text-[10px] text-white/60 mb-2 uppercase tracking-widest font-bold">Accredited by National Bodies</p>
-         <div className="flex justify-between items-center gap-2 overflow-x-auto scrollbar-hide">
-            {BADGES.map((b, i) => (
-              <img key={i} src={b} className="h-8 object-contain hover:scale-110 transition-transform opacity-90 hover:opacity-100" alt="Accredited" />
+      {/* ACCREDITATION FOOTER (Dark Gradient) */}
+      <div className="py-6 px-6" style={{ background: "linear-gradient(to right, #0f172a, #334155)" }}>
+         <p className="text-center text-[10px] text-white/50 mb-4 uppercase tracking-[0.3em] font-bold">Accredited by National Bodies</p>
+         <div className="flex justify-between items-end gap-4 overflow-x-auto scrollbar-hide pb-2">
+            {ACCREDITATIONS.map((badge, i) => (
+              <div key={i} className="flex flex-col items-center gap-2 group/badge min-w-[50px] shrink-0">
+                <div className="bg-white p-1 rounded-md shadow-lg group-hover/badge:scale-110 transition-transform duration-300">
+                   <img src={badge.img} className="h-8 w-auto object-contain" alt={badge.name} />
+                </div>
+                <span className="text-[9px] font-bold text-slate-400 group-hover/badge:text-white transition-colors">{badge.name}</span>
+              </div>
             ))}
          </div>
       </div>

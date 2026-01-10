@@ -5,6 +5,8 @@ import ServiceLines from "@/components/sections/home/ServiceLines/ServiceLines";
 import MedicalTechnology from "@/components/sections/home/MedicalTechnology/MedicalTechnology";
 import CorporateVideo from "@/components/sections/home/CorporateVideo";
 import FacilityShowcase from "@/components/sections/home/FacilityShowcase";
+import DoctorsTrustSignals from "@/components/sections/home/DoctorsTrustSignals";
+import AppointmentForm from "@/components/AppointmentForm"; 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,21 +19,13 @@ export default function Home() {
     <main className="bg-white">
       <HeroMedical />
       <TrustBar />
-      
-      {/* Service Lines with Images */}
       <ServiceLines />
-      
-      {/* New Video Section */}
       <CorporateVideo />
-
-      {/* Tech & Accreditations */}
       <MedicalTechnology />
       <Accreditations />
-      
-      {/* Facility Showcase */}
       <FacilityShowcase />
       
-      {/* Bottom Banner */}
+      {/* Quality Assurance Banner */}
       <section className="bg-slate-900 py-16 text-center text-white">
         <div className="container mx-auto px-6">
           <h2 className="text-2xl font-bold mb-4">Clinical Quality Assurance</h2>
@@ -40,6 +34,21 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Doctors Trust Signals (Contains Links to Form) */}
+      <DoctorsTrustSignals />
+
+      {/* Booking Form Section (Target for Links) */}
+      <section id="booking-form" className="py-24 bg-white relative overflow-hidden">
+         <div className="container mx-auto px-4 max-w-4xl relative z-10">
+            <div className="text-center mb-12">
+               <h2 className="text-4xl font-bold text-slate-900">Book Your Appointment</h2>
+               <p className="text-slate-500 mt-2">Skip the queue. Get confirmed slots via WhatsApp.</p>
+            </div>
+            <AppointmentForm />
+         </div>
+      </section>
+
     </main>
   );
 }
