@@ -1,8 +1,18 @@
 ﻿"use client";
 
 import React, { useState, useEffect } from "react";
-import { Smartphone, ArrowRight, MapPin, User, Phone, Calendar, Clock, ShieldCheck } from "lucide-react";
+import { Smartphone, ArrowRight, MapPin, User, Phone, Calendar, Clock, ShieldCheck, Activity } from "lucide-react";
 import { TARGET_LOCATIONS } from "@/lib/locations";
+
+// List of all diagnostic services
+const ALL_SERVICES = [
+  "Blood Tests", "Full Body Check Up", "Health Checkup", "Sonography", "Ultrasound",
+  "CT Scan", "MRI Scan", "PET Scan", "SPECT Scan", "DTPA Scan", "DEXA Bone Scan",
+  "2D Echo", "2D Echo Test", "TMT Test", "Stress Test", "Holter Monitoring",
+  "Angiography", "Angioplasty", "TAVR", "Pregnancy Sonography", "Obstetric Ultrasound",
+  "Anomaly Scan", "NT Scan", "Color Doppler", "Liver Fibroscan", "Liver Elastography",
+  "Mammography", "Follicular Study", "Prenatal Test", "NIPT Test", "NIPS Test", "NIPPT"
+];
 
 const ACCREDITATIONS = [
   { name: "NABL", img: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b027e422-nabl-certified-henotic-diagnostics.webp" },
@@ -15,11 +25,17 @@ const ACCREDITATIONS = [
 export default function AppointmentForm({ defaultLocation, testName }: { defaultLocation?: string, testName?: string }) {
   const [progress, setProgress] = useState(0);
   const [formData, setFormData] = useState({
-    name: "", mobile: "", test: testName || "DEXA Bone Scan", center: defaultLocation || "", date: "", time: ""
+    name: "", 
+    mobile: "", 
+    test: testName || "", 
+    center: defaultLocation || "", 
+    date: "", 
+    time: ""
   });
 
   useEffect(() => {
-    const filled = Object.values(formData).filter(val => val !== "").length;
+    // Calculate progress based on filled fields
+    const filled = Object.values(formData).filter(val => val && val.trim() !== "").length;
     setProgress(Math.round((filled / 6) * 100));
   }, [formData]);
 
@@ -29,7 +45,7 @@ export default function AppointmentForm({ defaultLocation, testName }: { default
 
   const handleWhatsApp = () => {
     const msg = `*Official Booking Request*%0A%0AName: ${formData.name}%0AMobile: ${formData.mobile}%0ATest: ${formData.test}%0ACenter: ${formData.center}%0ADate: ${formData.date}%0ATime: ${formData.time}`;
-    window.open(`https://wa.me/918879327184?text=${msg}`, '_blank');
+    window.open(`https://wa.me/918879327184?text=${msg}`, "_blank");
   };
 
   return (
@@ -70,10 +86,27 @@ export default function AppointmentForm({ defaultLocation, testName }: { default
           <input type="tel" name="mobile" placeholder="Mobile Number" onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-12 pr-4 py-3 placeholder-white/70 text-white focus:bg-white/30 outline-none backdrop-blur-md transition-all font-semibold shadow-sm focus:border-white focus:ring-2 focus:ring-white/20" />
         </div>
         
+        {/* Test Selection: Read-only if pre-selected, Dropdown otherwise */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
            <div className="relative group">
-             <input type="text" name="test" value={formData.test} readOnly className="w-full bg-white/10 border border-white/30 rounded-2xl px-4 py-3 text-white/90 cursor-not-allowed text-xs font-bold uppercase tracking-wide text-center" />
+             {testName ? (
+               // Read-only Mode (Service Page)
+               <>
+                 <Activity className="absolute left-3 top-3.5 text-white/80" size={18} />
+                 <input type="text" name="test" value={formData.test} readOnly className="w-full bg-white/10 border border-white/30 rounded-2xl pl-10 pr-4 py-3 text-white/90 cursor-not-allowed text-xs font-bold uppercase tracking-wide" />
+               </>
+             ) : (
+               // Dropdown Mode (Home Page)
+               <>
+                 <Activity className="absolute left-3 top-3.5 text-white/80" size={18} />
+                 <select name="test" value={formData.test} onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-10 pr-4 py-3 text-white outline-none backdrop-blur-md appearance-none cursor-pointer font-semibold text-sm shadow-sm focus:border-white focus:ring-2 focus:ring-white/20">
+                    <option className="text-slate-900" value="">Select Service</option>
+                    {ALL_SERVICES.map(s => <option key={s} className="text-slate-900" value={s}>{s}</option>)}
+                 </select>
+               </>
+             )}
            </div>
+
            <div className="relative group">
              <MapPin className="absolute left-3 top-3.5 text-white/80" size={18} />
              <select name="center" value={formData.center} onChange={handleChange} className="w-full bg-white/20 border border-white/40 rounded-2xl pl-10 pr-4 py-3 text-white outline-none backdrop-blur-md appearance-none cursor-pointer font-semibold text-sm shadow-sm focus:border-white focus:ring-2 focus:ring-white/20">
@@ -105,7 +138,7 @@ export default function AppointmentForm({ defaultLocation, testName }: { default
         </p>
       </div>
       
-      {/* ACCREDITATION FOOTER (Dark Gradient) */}
+      {/* ACCREDITATION FOOTER */}
       <div className="py-6 px-6" style={{ background: "linear-gradient(to right, #0f172a, #334155)" }}>
          <p className="text-center text-[10px] text-white/50 mb-4 uppercase tracking-[0.3em] font-bold">Accredited by National Bodies</p>
          <div className="flex justify-between items-end gap-4 overflow-x-auto scrollbar-hide pb-2">
