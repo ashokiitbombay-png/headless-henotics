@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Phone, CalendarCheck, ChevronDown, ChevronUp } from "lucide-react";
-import { companyDetails } from "@/lib/constants";
 import BookAppointmentModal from "@/components/features/BookAppointmentModal";
 
 export default function Header() {
@@ -34,19 +33,19 @@ export default function Header() {
           
           {/* LOGO SECTION - Stacked Text */}
           <Link href="/" className="flex items-center gap-3 group relative z-50">
-             <img 
-               src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/a91acb36-henotic-diagnostics-site-icon-no-background-scaled-e1767760900405.webp" 
-               alt="Henotic Icon" 
-               className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-md transition-transform group-hover:rotate-6"
-             />
-             <div className="flex flex-col leading-none">
-               <span className="text-white font-bold text-lg md:text-xl tracking-wide drop-shadow-sm group-hover:text-purple-100 transition-colors">
-                 Henotic
-               </span>
-               <span className="text-purple-100 font-medium text-xs md:text-sm tracking-[0.15em] uppercase">
-                 Diagnostics
-               </span>
-             </div>
+              <img 
+                src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/dc35eb9b-henotic-diagnostics-header-section-small-logo-01-scaled.webp" 
+                alt="Henotic Icon" 
+                className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-md transition-transform group-hover:rotate-6"
+              />
+              <div className="flex flex-col leading-none">
+                <span className="text-white font-bold text-lg md:text-xl tracking-wide drop-shadow-sm group-hover:text-purple-100 transition-colors uppercase">
+                  HENOTIC
+                </span>
+                <span className="text-purple-100 font-medium text-xs md:text-sm tracking-[0.15em] uppercase">
+                  DIAGNOSTICS
+                </span>
+              </div>
           </Link>
 
           {/* DESKTOP NAV */}
