@@ -102,7 +102,7 @@ export default function AboutUsPage() {
     }
   ];
 
-  // Added TypeScript Annotations (<string | null> and (index: string))
+  // State with TypeScript types
   const [activeFaq, setActiveFaq] = useState<string | null>(null);
 
   const toggleFaq = (index: string) => {
@@ -119,16 +119,16 @@ export default function AboutUsPage() {
     time: ""
   });
 
-  // Added TypeScript Annotation for form events
+  // Event Handlers with TypeScript types
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Calculate Progress (6 fields total)
   const filledFields = Object.values(formData).filter(value => value.trim() !== "").length;
   const progressPercentage = Math.round((filledFields / 6) * 100);
 
-  // Added TypeScript Annotation for form submission
   const handleWhatsAppSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (filledFields < 6) {
@@ -326,6 +326,85 @@ export default function AboutUsPage() {
                 <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
               </div>
             </div>
+
+            {/* Card 4 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/PET%20SCAN/henotic-diagnostics-mri-scan-ct-scan-pet-scan-dopa-scan-dtpa-scan.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="PET CT" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Advanced PET-CT Imaging</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Comprehensive PET-CT services featuring FDG, PSMA, and DOPA scans to support early diagnosis.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
+            {/* Card 5 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/DEXA-BONE-SCAN/dexa%20scan-navi-mumbai-henotic-diagnostics.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="DEXA Scan" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">BMD DEXA Bone Scan</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Advanced BMD DEXA Bone Scan for early osteoporosis detection, fracture risk assessment, and long-term bone health monitoring.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
+            {/* Card 6 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/2D-Echo/2d-echo-test-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="ECG 2D Echo" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">ECG, 2D Echo & TMT Package</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Complete cardiac check-up including ECG, 2D Echo, and Treadmill Test (TMT) to evaluate heart rhythm.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
+            {/* Card 7 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/Mammography/mammography-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Mammography" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Advanced Digital Mammography</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Safe, quick, and accurate breast cancer screening using high-resolution digital mammography for early detection.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
+            {/* Card 8 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/Ultrasound/henotic-diagnostics-sonography-ultrasound-pregnancy-scan-anomaly%20scan-nt-scan-kharghar-taloja%2C%20roadpali-navi%20mumbai.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Women Health" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Women’s Health & Prenatal Care</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Pregnancy Sonography & Obstetric Ultrasound, NT Scan & Anomaly Scan, Color Doppler Studies.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
+            {/* Card 9 */}
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer lg:col-start-2">
+              <div className="h-56 relative overflow-hidden">
+                <img src="https://storage.googleapis.com/wp-media-henoticbucket/NIPT%20TEST/nipt-genetic-screening-test-henotic-diagnostics-navi-mumbai-non-invasive-prenatal-test-for-pregnancy-best-lab-vashi-nerul-kharghar-maharashtra.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="NIPT Scan" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Prenatal Screening (NIPT/NIPS)</h3>
+              </div>
+              <div className="p-6 flex flex-col flex-grow bg-slate-50">
+                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Advanced prenatal screening in Navi Mumbai using NIPT/NIPS to detect chromosomal risks early with a safe, accurate, non-invasive blood test.</p>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -402,8 +481,34 @@ export default function AboutUsPage() {
             </h2>
             <div className="flex justify-center mb-6 text-2xl">⭐⭐⭐⭐⭐</div>
             <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-              At Henotic Diagnostics, quality, safety, and ethical medical practices are at the core of everything we do.
+              At Henotic Diagnostics, quality, safety, and ethical medical practices are at the core of everything we do. As a licensed diagnostic center in Kharghar, Navi Mumbai, we strictly adhere to national and international standards.
             </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div className="glass-panel p-8 rounded-3xl text-white">
+              <h3 className="text-2xl font-bold text-teal-300 mb-4 border-b border-white/20 pb-2">Our Accreditations</h3>
+              <ul className="space-y-4 text-lg">
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>ISO Certified</strong> – Standardized quality management systems.</li>
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>NABL Certified</strong> – Stringent laboratory quality and accuracy.</li>
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>AERB Approved</strong> – Radiation safety norms for imaging.</li>
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>PCPNDT Certified</strong> – Compliant with ethical prenatal guidelines.</li>
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>CAP Certified</strong> – Global standards for partner labs.</li>
+                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>ISOUG Aligned</strong> – Best practices in obstetric ultrasound.</li>
+              </ul>
+            </div>
+            
+            <div className="glass-panel p-8 rounded-3xl text-white">
+              <h3 className="text-2xl font-bold text-blue-300 mb-4 border-b border-white/20 pb-2">🤝 Certified Partner Network</h3>
+              <p className="text-lg mb-4">
+                To expand accessibility without compromising quality, Henotic Diagnostics collaborates with certified and authorized partner centers across Mumbai and Navi Mumbai.
+              </p>
+              <ul className="space-y-3 text-blue-100">
+                <li className="bg-white/10 p-3 rounded-xl border border-white/20">🏥 Valid government licenses and approvals</li>
+                <li className="bg-white/10 p-3 rounded-xl border border-white/20">🏆 Recognized certifications (NABL, CAP, ISO, AERB)</li>
+                <li className="bg-white/10 p-3 rounded-xl border border-white/20">📈 Proven track record of clinical accuracy</li>
+              </ul>
+            </div>
           </div>
 
           <div className="w-full relative h-[350px] overflow-hidden flex items-center">
