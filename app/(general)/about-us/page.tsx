@@ -156,7 +156,7 @@ export default function AboutUsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans overflow-hidden">
+    <div className="w-full bg-slate-50 font-sans overflow-x-hidden">
       {/* Inline Styles for Marquee Animation & Custom Form Background */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -195,10 +195,10 @@ export default function AboutUsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="space-y-6">
-              <span className="bg-blue-100 text-blue-800 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+              <span className="bg-blue-100 text-blue-800 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-sm">
                 Our Story
               </span>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-950 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-blue-950 leading-tight tracking-tight">
                 🏥 About Henotic Diagnostics
               </h1>
               <h2 className="text-xl md:text-2xl font-semibold text-blue-800">Who We Are</h2>
@@ -215,11 +215,11 @@ export default function AboutUsPage() {
               </div>
             </div>
             <div className="relative mt-8 lg:mt-0">
-              <div className="absolute inset-0 bg-blue-600 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-lg"></div>
+              <div className="absolute inset-0 bg-blue-600 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xl"></div>
               <img
                 src="https://storage.googleapis.com/wp-media-henoticbucket/MRI%20SCAN/henotic-diagnostics-mri-scan-panvel.webp"
                 alt="Henotic Diagnostics MRI Scan"
-                className="relative rounded-3xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)] object-cover h-[350px] md:h-[450px] lg:h-[500px] w-full border-4 border-white"
+                className="relative rounded-3xl shadow-[0_20px_50px_rgba(8,_112,_184,_0.3)] object-cover h-[350px] md:h-[450px] lg:h-[500px] w-full border-4 border-white transition-transform hover:scale-[1.01] duration-500"
               />
             </div>
           </div>
@@ -231,7 +231,7 @@ export default function AboutUsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="order-2 lg:order-1 relative group mt-8 lg:mt-0">
-               <div className="absolute inset-0 bg-teal-500 rounded-3xl transform -rotate-3 scale-105 opacity-20 blur-lg transition-transform group-hover:rotate-0 duration-500"></div>
+               <div className="absolute inset-0 bg-teal-500 rounded-3xl transform -rotate-3 scale-105 opacity-20 blur-xl transition-transform group-hover:rotate-0 duration-500"></div>
               <img
                 src="https://storage.googleapis.com/wp-media-henoticbucket/Front%20Office/henotic-diagnostics-name-plate.webp"
                 alt="Henotic Diagnostics Name Plate"
@@ -240,20 +240,20 @@ export default function AboutUsPage() {
             </div>
             <div className="order-1 lg:order-2 space-y-8 md:space-y-10">
               <div className="bg-slate-50 p-6 md:p-8 rounded-2xl border-l-8 border-blue-600 deep-shadow transition-transform hover:-translate-y-1 duration-300">
-                <h3 className="text-xl md:text-2xl font-bold text-blue-950 mb-3 flex items-center gap-2">🎯 Our Mission</h3>
-                <p className="text-slate-700 text-base md:text-lg">
+                <h3 className="text-xl md:text-2xl font-bold text-blue-950 mb-3 flex items-center gap-3">🎯 Our Mission</h3>
+                <p className="text-slate-700 text-base md:text-lg leading-relaxed">
                   To deliver accurate, timely, and affordable diagnostic insights by uniting advanced technology, expert medical professionals, and a robust network of licensed partner sites to ensure a seamless and accessible patient experience.
                 </p>
               </div>
               <div className="bg-slate-50 p-6 md:p-8 rounded-2xl border-l-8 border-teal-500 deep-shadow transition-transform hover:-translate-y-1 duration-300">
-                <h3 className="text-xl md:text-2xl font-bold text-blue-950 mb-3 flex items-center gap-2">👁️ Our Vision</h3>
-                <p className="text-slate-700 text-base md:text-lg">
+                <h3 className="text-xl md:text-2xl font-bold text-blue-950 mb-3 flex items-center gap-3">👁️ Our Vision</h3>
+                <p className="text-slate-700 text-base md:text-lg leading-relaxed">
                   To be the most trusted and expansive diagnostic and imaging network across Mumbai and Navi Mumbai, setting the benchmark for clinical excellence, innovation, and accessible healthcare through collaborative partnerships.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-blue-950 mb-6 flex items-center gap-2">💎 Our Core Values</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <h3 className="text-2xl md:text-3xl font-extrabold text-blue-950 mb-6 flex items-center gap-3">💎 Our Core Values</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                   {[
                     { title: "Clinical Precision", desc: "Uncompromising accuracy in every test." },
                     { title: "Patient-First Approach", desc: "Designing services around your comfort." },
@@ -288,7 +288,7 @@ export default function AboutUsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/Laboratory/henotic-diagnostics.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Pathology" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -301,7 +301,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/Ultrasound/henotic-diagnostics-sonography-ultrasound-pregnancy-scan-anomaly%20scan-nt-scan-kharghar-taloja%2C%20roadpali-navi%20mumbai.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Sonography" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -314,7 +314,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/PET%20SCAN/henotic-diagnostics-mri-scan-ct-scan-pet-scan-dopa-scan.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="CT MRI" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -327,7 +327,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/PET%20SCAN/henotic-diagnostics-mri-scan-ct-scan-pet-scan-dopa-scan-dtpa-scan.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="PET CT" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -340,7 +340,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 5 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/DEXA-BONE-SCAN/dexa%20scan-navi-mumbai-henotic-diagnostics.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="DEXA Scan" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -353,7 +353,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 6 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/2D-Echo/2d-echo-test-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="ECG 2D Echo" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -366,7 +366,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 7 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/Mammography/mammography-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Mammography" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -379,7 +379,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 8 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/Ultrasound/henotic-diagnostics-sonography-ultrasound-pregnancy-scan-anomaly%20scan-nt-scan-kharghar-taloja%2C%20roadpali-navi%20mumbai.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Women Health" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -392,7 +392,7 @@ export default function AboutUsPage() {
             </div>
 
             {/* Card 9 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer lg:col-start-2">
+            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group lg:col-start-2">
               <div className="h-48 md:h-56 relative overflow-hidden">
                 <img src="https://storage.googleapis.com/wp-media-henoticbucket/NIPT%20TEST/nipt-genetic-screening-test-henotic-diagnostics-navi-mumbai-non-invasive-prenatal-test-for-pregnancy-best-lab-vashi-nerul-kharghar-maharashtra.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="NIPT Scan" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
@@ -594,8 +594,8 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* 📅 Premium Official Booking Portal */}
-      <section id="appointment-portal" className="py-16 md:py-24 booking-gradient-bg relative">
+      {/* 📅 Premium Official Booking Portal (With padding-bottom to blend with footer) */}
+      <section id="appointment-portal" className="pt-16 pb-24 md:pt-24 md:pb-32 booking-gradient-bg relative">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay"></div>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
