@@ -2,6 +2,23 @@
 
 import React, { useState } from "react";
 
+// Raw Data processing for dropdowns
+const rawCities = [
+  "colaba", "cuffe-parade", "fort", "churchgate", "marine-lines", "nariman-point", "worli", "parel", "lower-parel", "mahalaxmi", "byculla", "dadar",
+  "sion", "kurla", "chembur", "ghatkopar", "vikhroli", "kanjurmarg", "bhandup", "mulund",
+  "bandra", "khar", "santacruz", "vile-parle", "andheri", "jogeshwari", "goregaon", "malad", "kandivali", "borivali", "dahisar",
+  "kurla-east", "chembur-east", "ghatkopar-east", "vikhroli-east", "mulund-east",
+  "vashi", "sanpada", "juinagar", "nerul", "seawoods", "cbd-belapur", "kharghar", "kamothe", "kalamboli", "panvel", "new-panvel", "taloja", "ghansoli", "kopar-khairane", "airoli", "turbhe"
+];
+
+const rawTests = [
+  "blood-tests", "full-body-check-up", "health-checkup", "sonography", "ultrasound", "ct-scan", "mri-scan", "pet-scan", "spect-scan", "dtpa-scan", "dexa-bone-scan", "2d-echo", "2d-echo-test", "tmt-test", "stress-test", "holter-monitoring", "angiography", "angioplasty", "TAVR", "pregnancy-sonography", "obstetric-ultrasound", "anomaly-scan", "nt-scan", "color-doppler", "liver-fibroscan", "liver-elastography", "mammography", "follicular-study", "prenatal-test", "nipt-test", "nips-test", "nippt"
+];
+
+const formatSlug = (slug: string) => slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+const cities = rawCities.map(formatSlug);
+const tests = rawTests.map(formatSlug);
+
 export default function AboutUsPage() {
   // FAQ Data Structure
   const faqs = [
@@ -85,10 +102,41 @@ export default function AboutUsPage() {
     }
   ];
 
-  const [activeFaq, setActiveFaq] = useState(null);
+  // Added TypeScript Annotations (<string | null> and (index: string))
+  const [activeFaq, setActiveFaq] = useState<string | null>(null);
 
-  const toggleFaq = (index) => {
+  const toggleFaq = (index: string) => {
     setActiveFaq(activeFaq === index ? null : index);
+  };
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    test: "",
+    center: "",
+    date: "",
+    time: ""
+  });
+
+  // Added TypeScript Annotation for form events
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const filledFields = Object.values(formData).filter(value => value.trim() !== "").length;
+  const progressPercentage = Math.round((filledFields / 6) * 100);
+
+  // Added TypeScript Annotation for form submission
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (filledFields < 6) {
+      alert("Please fill all the fields before confirming.");
+      return;
+    }
+    const message = `*Secure Appointment Request*%0A%0A*Name:* ${formData.name}%0A*Mobile:* ${formData.mobile}%0A*Test:* ${formData.test}%0A*Center:* ${formData.center}%0A*Date:* ${formData.date}%0A*Time:* ${formData.time}%0A%0A_Please confirm my priority booking._`;
+    window.open(`https://wa.me/918879327184?text=${message}`, '_blank');
   };
 
   const techImages = [
@@ -109,7 +157,7 @@ export default function AboutUsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans overflow-hidden">
-      {/* Inline Styles for Marquee Animation */}
+      {/* Inline Styles for Marquee Animation & Custom Form Background */}
       <style dangerouslySetInnerHTML={{
         __html: `
         @keyframes marquee {
@@ -136,6 +184,9 @@ export default function AboutUsPage() {
         .deep-shadow-hover:hover {
           box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3), 0 15px 25px -5px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.6);
           transform: translateY(-8px) scale(1.02);
+        }
+        .booking-gradient-bg {
+          background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
         }
       `}} />
 
@@ -237,7 +288,6 @@ export default function AboutUsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            
             {/* Card 1 */}
             <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
               <div className="h-56 relative overflow-hidden">
@@ -247,7 +297,7 @@ export default function AboutUsPage() {
               </div>
               <div className="p-6 flex flex-col flex-grow bg-slate-50">
                 <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Comprehensive blood tests, Full-body health checkups, Routine and specialized lab investigations.</p>
-                <button className="w-full bg-blue-900 text-white py-3 rounded-xl font-bold shadow-lg hover:bg-blue-800 transform hover:-translate-y-0.5 transition-all">View Rates & Book</button>
+                <a href="#appointment-portal" className="block text-center w-full bg-blue-900 text-white py-3 rounded-xl font-bold shadow-lg hover:bg-blue-800 transform hover:-translate-y-0.5 transition-all">Book Now</a>
               </div>
             </div>
 
@@ -260,7 +310,7 @@ export default function AboutUsPage() {
               </div>
               <div className="p-6 flex flex-col flex-grow bg-slate-50">
                 <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Advanced Ultrasound Imaging at Transparent Rates, and same-day reporting available.</p>
-                <button className="w-full bg-blue-900 text-white py-3 rounded-xl font-bold shadow-lg hover:bg-blue-800 transform hover:-translate-y-0.5 transition-all">View Rates & Book</button>
+                <a href="#appointment-portal" className="block text-center w-full bg-blue-900 text-white py-3 rounded-xl font-bold shadow-lg hover:bg-blue-800 transform hover:-translate-y-0.5 transition-all">Book Now</a>
               </div>
             </div>
 
@@ -273,88 +323,9 @@ export default function AboutUsPage() {
               </div>
               <div className="p-6 flex flex-col flex-grow bg-slate-50">
                 <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Accurate results, minimal wait time, and patient-friendly rates for all essential CT scans.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
+                <a href="#appointment-portal" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Book Now</a>
               </div>
             </div>
-
-            {/* Card 4 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/PET%20SCAN/henotic-diagnostics-mri-scan-ct-scan-pet-scan-dopa-scan-dtpa-scan.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="PET CT" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Advanced PET-CT Imaging</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Comprehensive PET-CT services featuring FDG, PSMA, and DOPA scans to support early diagnosis.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
-            {/* Card 5 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/DEXA-BONE-SCAN/dexa%20scan-navi-mumbai-henotic-diagnostics.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="DEXA Scan" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">BMD DEXA Bone Scan</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Advanced BMD DEXA Bone Scan for early osteoporosis detection, fracture risk assessment, and long-term bone health monitoring.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
-            {/* Card 6 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/2D-Echo/2d-echo-test-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="ECG 2D Echo" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">ECG, 2D Echo & TMT Package</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Complete cardiac check-up including ECG, 2D Echo, and Treadmill Test (TMT) to evaluate heart rhythm.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-blue-600 to-teal-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
-            {/* Card 7 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/Mammography/mammography-henotic-diagnostics-kharghar.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Mammography" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Advanced Digital Mammography</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Safe, quick, and accurate breast cancer screening using high-resolution digital mammography for early detection.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
-            {/* Card 8 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/Ultrasound/henotic-diagnostics-sonography-ultrasound-pregnancy-scan-anomaly%20scan-nt-scan-kharghar-taloja%2C%20roadpali-navi%20mumbai.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="Women Health" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Women’s Health & Prenatal Care</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Pregnancy Sonography & Obstetric Ultrasound, NT Scan & Anomaly Scan, Color Doppler Studies.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
-            {/* Card 9 */}
-            <div className="bg-white rounded-2xl overflow-hidden deep-shadow deep-shadow-hover transition-all duration-300 flex flex-col group cursor-pointer lg:col-start-2">
-              <div className="h-56 relative overflow-hidden">
-                <img src="https://storage.googleapis.com/wp-media-henoticbucket/NIPT%20TEST/nipt-genetic-screening-test-henotic-diagnostics-navi-mumbai-non-invasive-prenatal-test-for-pregnancy-best-lab-vashi-nerul-kharghar-maharashtra.webp" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="NIPT Scan" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                <h3 className="absolute bottom-4 left-4 right-4 text-2xl font-bold text-white drop-shadow-md">Prenatal Screening (NIPT/NIPS)</h3>
-              </div>
-              <div className="p-6 flex flex-col flex-grow bg-slate-50">
-                <p className="text-slate-600 mb-6 flex-grow font-medium leading-relaxed">Advanced prenatal screening in Navi Mumbai using NIPT/NIPS to detect chromosomal risks early with a safe, accurate, non-invasive blood test.</p>
-                <a href="https://share.google/HTY8Tw1UvBE1ggpPY" target="_blank" rel="noreferrer" className="block w-full text-center bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">Learn More</a>
-              </div>
-            </div>
-
           </div>
         </div>
       </section>
@@ -405,16 +376,13 @@ export default function AboutUsPage() {
           </div>
         </div>
 
-        {/* CSS Marquee Slider */}
         <div className="w-full relative h-[400px] bg-slate-50 border-y border-slate-200 py-8 shadow-inner overflow-hidden flex items-center">
           <div className="animate-marquee">
-            {/* First Set */}
             {techImages.map((src, index) => (
               <div key={index} className="w-1/4 flex-shrink-0 px-4">
                 <img src={src} className="w-full h-80 object-cover rounded-2xl deep-shadow border-4 border-white" alt={`Tech Image ${index}`} />
               </div>
             ))}
-            {/* Duplicate Set for Infinite Scroll */}
             {techImages.map((src, index) => (
               <div key={`dup-${index}`} className="w-1/4 flex-shrink-0 px-4">
                 <img src={src} className="w-full h-80 object-cover rounded-2xl deep-shadow border-4 border-white" alt={`Tech Image Dup ${index}`} />
@@ -424,11 +392,9 @@ export default function AboutUsPage() {
         </div>
       </section>
 
-      {/* 📜 Certifications & Compliance (Glassmorphism & Trust Signals) */}
+      {/* 📜 Certifications & Compliance */}
       <section className="py-24 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-blue-950 relative overflow-hidden">
-        {/* Dynamic Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 to-teal-900/90 backdrop-blur-sm z-0"></div>
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg flex items-center justify-center gap-4">
@@ -436,37 +402,10 @@ export default function AboutUsPage() {
             </h2>
             <div className="flex justify-center mb-6 text-2xl">⭐⭐⭐⭐⭐</div>
             <p className="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">
-              At Henotic Diagnostics, quality, safety, and ethical medical practices are at the core of everything we do. As a licensed diagnostic center in Kharghar, Navi Mumbai, we strictly adhere to national and international standards.
+              At Henotic Diagnostics, quality, safety, and ethical medical practices are at the core of everything we do.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className="glass-panel p-8 rounded-3xl text-white">
-              <h3 className="text-2xl font-bold text-teal-300 mb-4 border-b border-white/20 pb-2">Our Accreditations</h3>
-              <ul className="space-y-4 text-lg">
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>ISO Certified</strong> – Standardized quality management systems.</li>
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>NABL Certified</strong> – Stringent laboratory quality and accuracy.</li>
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>AERB Approved</strong> – Radiation safety norms for imaging.</li>
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>PCPNDT Certified</strong> – Compliant with ethical prenatal guidelines.</li>
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>CAP Certified</strong> – Global standards for partner labs.</li>
-                <li className="flex items-start gap-3"><span className="text-teal-400">✔️</span> <strong>ISOUG Aligned</strong> – Best practices in obstetric ultrasound.</li>
-              </ul>
-            </div>
-            
-            <div className="glass-panel p-8 rounded-3xl text-white">
-              <h3 className="text-2xl font-bold text-blue-300 mb-4 border-b border-white/20 pb-2">🤝 Certified Partner Network</h3>
-              <p className="text-lg mb-4">
-                To expand accessibility without compromising quality, Henotic Diagnostics collaborates with certified and authorized partner centers across Mumbai and Navi Mumbai.
-              </p>
-              <ul className="space-y-3 text-blue-100">
-                <li className="bg-white/10 p-3 rounded-xl border border-white/20">🏥 Valid government licenses and approvals</li>
-                <li className="bg-white/10 p-3 rounded-xl border border-white/20">🏆 Recognized certifications (NABL, CAP, ISO, AERB)</li>
-                <li className="bg-white/10 p-3 rounded-xl border border-white/20">📈 Proven track record of clinical accuracy</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Glass Top Photo Frames Slider */}
           <div className="w-full relative h-[350px] overflow-hidden flex items-center">
             <div className="animate-marquee" style={{ animationDuration: '30s', animationDirection: 'reverse' }}>
               {certImages.map((src, index) => (
@@ -511,16 +450,10 @@ export default function AboutUsPage() {
                           className="w-full flex justify-between items-center p-5 text-left bg-slate-50 hover:bg-blue-50 transition-colors focus:outline-none"
                         >
                           <span className="font-semibold text-slate-800 text-lg pr-4">{item.q}</span>
-                          <span className={`text-blue-600 text-2xl transform transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
-                            +
-                          </span>
+                          <span className={`text-blue-600 text-2xl transform transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>+</span>
                         </button>
-                        <div 
-                          className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-                        >
-                          <div className="p-5 text-slate-600 bg-white border-t border-slate-100 text-lg leading-relaxed">
-                            {item.a}
-                          </div>
+                        <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+                          <div className="p-5 text-slate-600 bg-white border-t border-slate-100 text-lg leading-relaxed">{item.a}</div>
                         </div>
                       </div>
                     );
@@ -528,6 +461,142 @@ export default function AboutUsPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🏆 Accredited by National Bodies Section */}
+      <section className="py-16 bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-10 drop-shadow-lg tracking-wide">
+            🏆 Accredited by National Bodies
+          </h2>
+          <div className="flex flex-wrap justify-center gap-8 md:gap-12">
+            {[
+              { title: "NABL", src: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b027e422-nabl-certified-henotic-diagnostics.webp" },
+              { title: "ISO", src: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b04115be-iso-certified-henotic-diagnostics.webp" },
+              { title: "AERB", src: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/b3a1aaeb-aerb-certified-henotic-diagnostics.webp" },
+              { title: "NABH", src: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/fb54c3da-nabh-certified-henotic-diagnostics.webp" },
+              { title: "PCPNDT", src: "https://storage.googleapis.com/wp-media-henoticbucket/2026/01/3a45d45f-pcpndt-certified-henotic-diagnostics.webp" }
+            ].map((cert, index) => (
+              <div key={index} className="flex flex-col items-center group">
+                <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-4 rounded-full h-28 w-28 md:h-36 md:w-36 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] transform group-hover:-translate-y-3 group-hover:scale-110 group-hover:bg-white transition-all duration-300">
+                  <img src={cert.src} alt={cert.title} className="max-h-full max-w-full object-contain drop-shadow-md rounded-full filter brightness-110 group-hover:brightness-100" />
+                </div>
+                <span className="text-blue-100 mt-5 text-lg font-bold tracking-widest uppercase">{cert.title}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 📅 Premium Official Booking Portal */}
+      <section id="appointment-portal" className="py-24 booking-gradient-bg relative">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 mix-blend-overlay"></div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden">
+            
+            {/* Left Info Panel */}
+            <div className="lg:col-span-2 p-8 md:p-12 text-white h-full flex flex-col justify-center bg-black/20">
+              <span className="bg-white/20 text-white border border-white/40 text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-6 tracking-widest w-max shadow-inner">OFFICIAL BOOKING PORTAL</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-md">Excellence in Diagnostics</h2>
+              <p className="text-lg text-white/90 mb-8 leading-relaxed">
+                <strong>12+ Years</strong> of precision. NABL Accredited. Trusted by leading specialists in Mumbai.
+              </p>
+              
+              <ul className="space-y-5 text-lg font-medium">
+                <li className="flex items-center gap-4"><span className="bg-white/20 p-2 rounded-full">🏆</span> AERB Accredited Lab</li>
+                <li className="flex items-center gap-4"><span className="bg-white/20 p-2 rounded-full">📜</span> PCPNDT Registered</li>
+                <li className="flex items-center gap-4"><span className="bg-white/20 p-2 rounded-full">🖥️</span> 3T MRI & 128-Slice CT</li>
+                <li className="flex items-center gap-4"><span className="bg-white/20 p-2 rounded-full">⏱️</span> Same Day Reports</li>
+                <li className="flex items-center gap-4"><span className="bg-white/20 p-2 rounded-full">🏠</span> Home Collection</li>
+              </ul>
+            </div>
+
+            {/* Right Booking Form */}
+            <div className="lg:col-span-3 p-8 md:p-12 bg-white h-full flex flex-col justify-center">
+              <div className="mb-8 border-b border-slate-100 pb-6">
+                <h3 className="text-3xl font-extrabold text-slate-800 mb-2">Secure Appointment</h3>
+                <p className="text-slate-500 font-medium">Fill the details below for priority confirmation.</p>
+              </div>
+
+              {/* Dynamic Progress Bar */}
+              <div className="mb-8">
+                <div className="flex justify-between text-sm font-bold text-slate-600 mb-2">
+                  <span>Form Completion</span>
+                  <span className={progressPercentage === 100 ? "text-green-600 scale-110 transition-transform" : "text-blue-600"}>{progressPercentage}% Filled</span>
+                </div>
+                <div className="w-full bg-slate-100 rounded-full h-3 shadow-inner">
+                  <div 
+                    className={`h-3 rounded-full transition-all duration-700 ease-out shadow-md ${progressPercentage === 100 ? 'bg-green-500' : 'booking-gradient-bg'}`} 
+                    style={{ width: `${progressPercentage}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Patient Name */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Patient Name</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Enter full name" className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium" required />
+                  </div>
+
+                  {/* Mobile Number */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Mobile Number</label>
+                    <input type="tel" name="mobile" value={formData.mobile} onChange={handleInputChange} placeholder="e.g. 9876543210" className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium" required />
+                  </div>
+
+                  {/* Test Name */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Test Name</label>
+                    <select name="test" value={formData.test} onChange={handleInputChange} className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium appearance-none cursor-pointer" required>
+                      <option value="">Select Required Test...</option>
+                      {tests.map((test, idx) => <option key={idx} value={test}>{test}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Nearest Center */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Select Nearest Center</label>
+                    <select name="center" value={formData.center} onChange={handleInputChange} className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium appearance-none cursor-pointer" required>
+                      <option value="">Choose your location...</option>
+                      {cities.map((city, idx) => <option key={idx} value={city}>{city}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Date */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Date (dd-mm-yyyy)</label>
+                    <input type="date" name="date" value={formData.date} onChange={handleInputChange} className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium cursor-pointer" required />
+                  </div>
+
+                  {/* Time */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2">Time (--:--)</label>
+                    <input type="time" name="time" value={formData.time} onChange={handleInputChange} className="w-full px-5 py-4 rounded-xl border-2 border-slate-200 focus:ring-0 focus:border-purple-500 outline-none transition bg-slate-50 font-medium cursor-pointer" required />
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-8">
+                  <button 
+                    type="submit" 
+                    className={`w-full flex items-center justify-center gap-3 py-5 rounded-xl font-extrabold text-white text-lg md:text-xl transition-all shadow-[0_10px_20px_rgba(37,211,102,0.3)] transform hover:-translate-y-1 ${progressPercentage === 100 ? 'bg-[#25D366] hover:bg-[#20b958] cursor-pointer' : 'bg-[#25D366]/60 cursor-not-allowed opacity-80'}`}
+                    disabled={progressPercentage < 100}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 16 16">
+                      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    </svg>
+                    Confirm Appointment Now Via WhatsApp
+                  </button>
+                  {progressPercentage < 100 && <p className="text-center text-sm text-slate-500 mt-4 font-semibold">Please fill all fields to enable WhatsApp booking.</p>}
+                </div>
+              </form>
+            </div>
+            
           </div>
         </div>
       </section>
