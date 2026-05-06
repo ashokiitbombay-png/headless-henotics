@@ -1,6 +1,42 @@
 import type { Metadata } from "next";
+
+export const metadata = {
+  title: 'Henotic Diagnostics',
+  description: 'Your site description here',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png', sizes: '48x48' }
+    ]
+  }
+};
+
 import { Geist, Geist_Mono } from "next/font/google";
+
+export const metadata = {
+  title: 'Henotic Diagnostics',
+  description: 'Your site description here',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png', sizes: '48x48' }
+    ]
+  }
+};
+
 import "./globals.css";
+
+
+export const metadata = {
+  title: 'Henotic Diagnostics',
+  description: 'Your site description here',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png', sizes: '48x48' }
+    ]
+  }
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,3 +68,4 @@ export default function RootLayout({
     </html>
   );
 }
+
