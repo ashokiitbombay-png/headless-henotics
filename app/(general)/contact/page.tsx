@@ -40,15 +40,15 @@ export default function ContactUs() {
     setProgress(Math.round((filledFields / totalFields) * 100));
   }, [formData]);
 
-  const handleChange = (e) => {
+  // Added TypeScript definitions here
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle WhatsApp Redirection
-  const handleWhatsAppSubmit = (e) => {
+  // Added TypeScript definitions here
+  const handleWhatsAppSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
-    // Backticks and variables are preserved correctly now
     const message = `Hello Henotic Diagnostics, I would like to confirm my appointment:
 - Patient Name: *${formData.name}*
 - Mobile: *${formData.mobile}*
@@ -155,7 +155,7 @@ export default function ContactUs() {
           </div>
         </section>
 
-        {/* --- NEW PREMIUM BOOKING FORM SECTION --- */}
+        {/* --- PREMIUM BOOKING FORM SECTION --- */}
         <section className="py-12" id="booking">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
