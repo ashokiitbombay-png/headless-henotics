@@ -40,12 +40,12 @@ export default function ContactUs() {
     setProgress(Math.round((filledFields / totalFields) * 100));
   }, [formData]);
 
-  // Added TypeScript definitions here
+  // ✅ Fixed: Added React.ChangeEvent type definition
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Added TypeScript definitions here
+  // ✅ Fixed: Added React.FormEvent type definition
   const handleWhatsAppSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
