@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -13,8 +13,14 @@ const REGIONS = {
   "Navi Mumbai": ["vashi", "sanpada", "juinagar", "nerul", "seawoods", "cbd-belapur", "kharghar", "kamothe", "kalamboli", "panvel", "new-panvel", "taloja", "ghansoli", "kopar-khairane", "airoli", "turbhe"],
 };
 
+// Helper function to determine the URL region slug
+const getRegionSlug = (regionCategory: string) => {
+  if (regionCategory === "Navi Mumbai") return "navi-mumbai";
+  return "mumbai"; 
+};
+
 const SERVICE_CATEGORIES = {
-  "Pathology & Preventive": ["blood-tests", "full-body-check-up", "health-checkup"],
+  "Pathology & Preventive": ["blood-test", "full-body-check-up", "health-checkup"],
   "Radiology & Imaging": ["sonography", "ultrasound", "pregnancy-sonography", "obstetric-ultrasound", "anomaly-scan", "nt-scan", "color-doppler", "mammography", "follicular-study"],
   "Advanced Imaging": ["ct-scan", "mri-scan", "pet-scan", "spect-scan", "dtpa-scan", "dexa-bone-scan", "liver-fibroscan", "liver-elastography"],
   "Cardiology Diagnostics": ["2d-echo", "2d-echo-test", "tmt-test", "stress-test", "holter-monitoring"],
@@ -31,7 +37,7 @@ export default function SecondFooter() {
       className="text-white py-16 font-sans relative"
       style={{
         background: "linear-gradient(90deg, #4568dc 0%, #b06ab3 100%)",
-        transform: "translateZ(0)" // Hardware acceleration to prevent wobble
+        transform: "translateZ(0)"
       }}
     >
       <div className="container mx-auto px-6 relative z-10">
@@ -94,7 +100,7 @@ export default function SecondFooter() {
                                 {services.map((service) => (
                                   <li key={service}>
                                     <Link 
-                                      href={`/${service}/${location}`}
+                                      href={`/${service}/${getRegionSlug(openRegion)}/${location}`}
                                       className="block text-[11px] font-medium text-white/70 hover:text-white transition-colors hover:translate-x-1 duration-200"
                                     >
                                       {formatText(service)}
