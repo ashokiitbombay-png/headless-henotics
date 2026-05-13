@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Phone, CalendarCheck, ChevronDown, ChevronUp } from "lucide-react";
-import BookAppointmentModal from "@/components/features/BookAppointmentModal";
+import BookAppointmentModal from "@/components/features/appointments/BookAppointmentModal";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

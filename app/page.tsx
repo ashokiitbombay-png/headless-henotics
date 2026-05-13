@@ -1,12 +1,12 @@
-﻿import HeroMedical from "@/components/sections/home/HeroMedical/HeroMedical";
-import TrustBar from "@/components/sections/home/TrustIndicators/TrustBar";
-import Accreditations from "@/components/sections/home/TrustIndicators/blocks/Accreditations";
-import ServiceLines from "@/components/sections/home/ServiceLines/ServiceLines";
-import MedicalTechnology from "@/components/sections/home/MedicalTechnology/MedicalTechnology";
+import HeroMedical from "@/components/sections/home/HeroMedical";
+import TrustBar from "@/components/sections/home/trust-indicators/TrustBar";
+import Accreditations from "@/components/sections/home/trust-indicators/blocks/Accreditations";
+import ServiceLines from "@/components/sections/home/ServiceLines";
+import MedicalTechnology from "@/components/sections/home/MedicalTechnology";
 import CorporateVideo from "@/components/sections/home/CorporateVideo";
 import FacilityShowcase from "@/components/sections/home/FacilityShowcase";
 import DoctorsTrustSignals from "@/components/sections/home/DoctorsTrustSignals";
-import AppointmentForm from "@/components/AppointmentForm"; 
+import AppointmentForm from "@/components/features/appointments/AppointmentForm"; 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
