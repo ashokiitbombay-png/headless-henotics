@@ -1,10 +1,10 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import { TARGET_LOCATIONS, slugify, unslugify } from "@/lib/locations";
-import AppointmentForm from "@/components/AppointmentForm"; 
-import DoctorsGrid from "@/components/DoctorsGrid";
+import AppointmentForm from "@/components/features/appointments/AppointmentForm"; 
+import DoctorsGrid from "@/components/features/doctors/DoctorsGrid";
 import { 
   CheckCircle2, Star, Bone, Activity, CalendarCheck, Phone, ShieldCheck, 
   Clock, FileText, Smartphone, User, Stethoscope, Microscope, Zap, ChevronDown, 
@@ -28,7 +28,7 @@ const IMAGES = {
 const FAQS = [
   { q: "Is BMD Dexa Bone Scan Fasting needed?", a: "No fasting is needed. You can eat and drink normally. Stop calcium medication 24 hrs early prior to the scan." },
   { q: "What is the procedure for a DEXA scan?", a: "It is a walk-in, walk-out procedure. You lie flat for 10 minutes while a scanner arm moves above you. It is painless and uses very low radiation." },
-  { q: "What is 3 Body Parts DEXA scan?", a: "A 3 Body Parts scan looks at the Spine and both Hips—the areas most prone to fractures." },
+  { q: "What is 3 Body Parts DEXA scan?", a: "A 3 Body Parts scan looks at the Spine and both Hips�the areas most prone to fractures." },
   { q: "What is Whole Body DEXA Scan?", a: "A Whole Body scan measures every bone in the body and also provides a Body Composition report (fat vs muscle mass)." }
 ];
 
@@ -87,7 +87,7 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
           "url": `https://henoticdiagnostics.com${currentLocationLink}`, 
           "address": { "@type": "PostalAddress", "addressLocality": cityName, "addressRegion": "Maharashtra", "addressCountry": "IN" }, 
           "medicalSpecialty": "Radiology",
-          "priceRange": "₹1800-₹5000",
+          "priceRange": "?1800-?5000",
           "openingHoursSpecification": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59" }
       })}} />
 
@@ -133,7 +133,7 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Scientific Science of DEXA</h2>
               <p className="text-slate-600 leading-relaxed">
-                The <strong>Dual-Energy X-ray Absorptiometry (DEXA)</strong> scan utilizes two distinct X-ray energy beams. One beam is absorbed by soft tissue, and the other by bone. By subtracting soft tissue absorption, our advanced Fan-Beam technology calculates <strong>Bone Mineral Density (BMD)</strong> in g/cm² with high precision.
+                The <strong>Dual-Energy X-ray Absorptiometry (DEXA)</strong> scan utilizes two distinct X-ray energy beams. One beam is absorbed by soft tissue, and the other by bone. By subtracting soft tissue absorption, our advanced Fan-Beam technology calculates <strong>Bone Mineral Density (BMD)</strong> in g/cm� with high precision.
               </p>
               
               <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm">
@@ -164,7 +164,7 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Single Site Scan</h3>
                 <p className="text-slate-500 text-sm mb-4 min-h-[40px]">Focused scan of either the Lumbar Spine OR one Hip.</p>
                 <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                  <span className="text-2xl font-black text-blue-600">₹1,800</span>
+                  <span className="text-2xl font-black text-blue-600">?1,800</span>
                   <a href="#booking-form" className="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">BOOK NOW</a>
                 </div>
               </div>
@@ -177,7 +177,7 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
                 <h3 className="text-xl font-bold text-slate-900 mb-2">3 Body Parts</h3>
                 <p className="text-slate-500 text-sm mb-4 min-h-[40px]">Lumbar Spine + Both Hips. The clinical standard for Osteoporosis.</p>
                 <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                  <span className="text-2xl font-black text-yellow-500">₹3,500</span>
+                  <span className="text-2xl font-black text-yellow-500">?3,500</span>
                   <a href="#booking-form" className="text-xs font-bold bg-yellow-400 text-black px-4 py-2 rounded-full hover:bg-yellow-500 transition-colors">BOOK NOW</a>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default async function DynamicServiceLocationPage({ params }: { params: P
                 <h3 className="text-xl font-bold text-slate-900 mb-2">Whole Body Scan</h3>
                 <p className="text-slate-500 text-sm mb-4 min-h-[40px]">Full Skeleton BMD + Body Composition (Fat vs Muscle).</p>
                 <div className="flex justify-between items-center pt-4 border-t border-slate-100">
-                  <span className="text-2xl font-black text-purple-600">₹5,000</span>
+                  <span className="text-2xl font-black text-purple-600">?5,000</span>
                   <a href="#booking-form" className="text-xs font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-purple-600 transition-colors">BOOK NOW</a>
                 </div>
               </div>
