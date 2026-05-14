@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { companyDetails } from "@/lib/constants";
 import { MapPin, Phone, Mail, ChevronRight, Facebook, Twitter, Instagram, Linkedin, FileText, Clock, ExternalLink } from "lucide-react";
 
@@ -104,16 +104,20 @@ export default function PremiumFooter() {
            <div className="text-[10px] font-bold text-white tracking-[0.2em] uppercase text-center md:text-left">
              © {new Date().getFullYear()} Henotic Diagnostics. All Rights Reserved.
            </div>
+           
+           {/* UPDATED SOCIAL MEDIA LINKS */}
            <div className="flex gap-4">
-              {companyDetails.socials.map((social, i) => (
-                <a key={i} href={social.url} target="_blank" className="w-8 h-8 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center hover:bg-white hover:text-[#cb3066] text-white transition-all">
-                  {social.name === "Facebook" && <Facebook size={14} />}
-                  {social.name === "Twitter" && <Twitter size={14} />}
-                  {social.name === "Instagram" && <Instagram size={14} />}
-                  {social.name === "LinkedIn" && <Linkedin size={14} />}
-                </a>
-              ))}
+              <a href="https://www.facebook.com/henoticdiagnostics2019/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center hover:bg-white hover:text-[#cb3066] text-white transition-all">
+                <Facebook size={14} />
+              </a>
+              <a href="https://www.instagram.com/henoticdiagnostics2019/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center hover:bg-white hover:text-[#cb3066] text-white transition-all">
+                <Instagram size={14} />
+              </a>
+              <a href="https://in.pinterest.com/henoticdiagnostics2019/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center hover:bg-white hover:text-[#cb3066] text-white transition-all font-bold text-xs">
+                P
+              </a>
            </div>
+
            <div className="flex gap-6 text-[10px] font-bold text-white tracking-widest uppercase">
               <Link href="/sitemap.xml" className="hover:text-white/80 transition-colors flex items-center gap-1"><FileText size={12} /> Sitemap</Link>
               <Link href="#" className="hover:text-white/80 transition-colors">Privacy Policy</Link>
