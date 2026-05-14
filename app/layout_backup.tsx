@@ -1,4 +1,4 @@
-import "./globals.css";
+﻿import "./globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import SecondFooter from "@/components/layout/SecondFooter";
@@ -23,10 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-            <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2224247495448831" crossOrigin="anonymous"></script>
-      </head>
-<body className="flex flex-col min-h-screen font-sans antialiased selection:bg-purple-200 selection:text-purple-900 relative">
+      <body className="flex flex-col min-h-screen font-sans antialiased selection:bg-purple-200 selection:text-purple-900 relative">
         
         {/* FIXED BACKGROUND LAYER - Solves Mobile Wobble */}
         <div 
