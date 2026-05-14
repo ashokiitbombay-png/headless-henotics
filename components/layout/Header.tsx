@@ -34,7 +34,7 @@ export default function Header() {
           {/* LOGO SECTION - Stacked Text */}
           <Link href="/" className="flex items-center gap-3 group relative z-50">
               <img 
-                src="https://storage.googleapis.com/wp-media-henoticbucket/2026/01/dc35eb9b-henotic-diagnostics-header-section-small-logo-01-scaled.webp" 
+                src="https://storage.googleapis.com/wp-media-henoticbucket/Site-Icon-SVG%20files/henotic-diagnostics-logo-site-icon.svg" 
                 alt="Henotic Icon" 
                 className="h-10 w-10 md:h-12 md:w-12 object-contain drop-shadow-md transition-transform group-hover:rotate-6"
               />

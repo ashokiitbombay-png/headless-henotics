@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Script from "next/script";
-import AppointmentForm from "@/components/AppointmentForm"; 
+import AppointmentForm from "@/components/features/appointments/AppointmentForm"; 
 import { CheckCircle2, Star, Bone, Activity, ChevronDown, ShieldCheck, Clock, Smartphone, ArrowRight } from "lucide-react";
 
 const IMAGES = {
