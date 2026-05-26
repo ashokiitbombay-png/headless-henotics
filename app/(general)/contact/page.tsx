@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import GoogleReviews from "@/components/features/reviews/GoogleReviews";
 import React, { useState, useEffect } from 'react';
 
 export default function ContactUs() {
@@ -262,6 +263,7 @@ export default function ContactUs() {
         </section>
 
       </div>
+      <GoogleReviews />
     </main>
   );
 }

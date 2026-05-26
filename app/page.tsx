@@ -1,3 +1,4 @@
+import GoogleReviews from "@/components/features/reviews/GoogleReviews";
 import HeroMedical from "@/components/sections/home/HeroMedical";
 import TrustBar from "@/components/sections/home/trust-indicators/TrustBar";
 import Accreditations from "@/components/sections/home/trust-indicators/blocks/Accreditations";
@@ -49,6 +50,7 @@ export default function Home() {
          </div>
       </section>
 
+      <GoogleReviews />
     </main>
   );
 }

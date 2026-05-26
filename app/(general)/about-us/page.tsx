@@ -1,5 +1,6 @@
-﻿"use client";
+"use client";
 
+import GoogleReviews from "@/components/features/reviews/GoogleReviews";
 import React, { useState } from "react";
 
 // Raw Data processing for dropdowns
