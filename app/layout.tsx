@@ -1,3 +1,4 @@
+import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import "./globals.css";
 import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
@@ -48,6 +49,7 @@ export default function RootLayout({
           <SecondFooter />
           <PremiumFooter />
         </div>
+        <LocalBusinessSchema />
       </body>
     </html>
   );
