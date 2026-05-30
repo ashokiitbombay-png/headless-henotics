@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import "./globals.css";
 import type { Metadata } from "next";
@@ -50,6 +51,7 @@ export default function RootLayout({
           <PremiumFooter />
         </div>
         <LocalBusinessSchema />
+        <SpeedInsights />
       </body>
     </html>
   );
